@@ -1,5 +1,5 @@
 =======
-# professorqiaodandanwebsite
+# Professor Qiao Dandan Website
 Portfolio Website for Professor Qiao DanDan.
 
 # React + TypeScript + Vite
