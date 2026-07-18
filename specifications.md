@@ -280,8 +280,18 @@ Matching behavior:
 | `max-width: 900px` | Multi-column content grids collapse |
 | `max-width: 700px` | Publication tabs use horizontal scrolling; timeline simplifies; publication cards become single-column |
 | `max-width: 620px` | Main margins and navigation padding reduce; selected multi-column cards collapse |
+| `max-width: 380px` | About action buttons switch from two columns to one full-width control per row |
 
 The Alumni grid displays three columns above 900 px, two columns at 900 px and below, and one column at 620 px and below.
+
+At 620 px and below, mobile-only rules preserve the desktop presentation while adapting the site as follows:
+
+- The hotbar remains horizontally scrollable with compact, non-shrinking, touch-sized buttons.
+- The About hero uses reduced image, title, and vertical spacing; its action buttons wrap into two columns and then one column below 380 px.
+- About, Teaching, Services, Awards, and Alumni content uses the full available main-column width.
+- Publication cards use compact single-column spacing, and the publication expansion control fills the available width.
+- Long service, award, and teaching list content may wrap anywhere rather than causing horizontal overflow.
+- The global search panel fits the dynamic viewport, uses compact padding, and hides decorative keyboard hints to leave room for result text.
 
 The minimum supported layout width is 320 px as declared by the global body styles.
 

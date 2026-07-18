@@ -1291,3 +1291,241 @@ a {
     border-radius: 20px;
   }
 }
+
+@media (max-width: 620px) {
+  body {
+    overflow-x: clip;
+  }
+
+  .site-main {
+    padding: 78px 0 64px;
+  }
+
+  .hotbar {
+    top: 8px;
+    margin-top: 8px;
+  }
+
+  .hotbar-nav {
+    width: 100%;
+    gap: 2px;
+    padding: 6px;
+  }
+
+  .hotbar-nav button {
+    min-height: 40px;
+  }
+
+  .brand-button,
+  .nav-pill {
+    padding-inline: 12px;
+    font-size: 0.82rem;
+  }
+
+  .search-shortcut {
+    min-width: 40px;
+    justify-content: center;
+    margin-left: 4px;
+    padding-inline: 10px;
+  }
+
+  .about-hero {
+    min-height: auto;
+    padding: 36px 0 56px;
+  }
+
+  .portrait-wrap {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 28px;
+  }
+
+  .status-pill {
+    gap: 9px;
+    max-width: 100%;
+    padding: 10px 14px;
+    border-radius: 20px;
+    font-size: 0.86rem;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .status-dot {
+    flex: 0 0 auto;
+  }
+
+  .about-title {
+    margin: 36px 0 18px;
+    font-size: clamp(2.75rem, 16vw, 4rem);
+    letter-spacing: -0.07em;
+  }
+
+  .about-content,
+  .teaching-content,
+  .services-content,
+  .awards-content {
+    width: 100%;
+  }
+
+  .about-block {
+    margin-top: 24px;
+  }
+
+  .about-block h2 {
+    font-size: 1.1rem;
+  }
+
+  .about-block ul {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .about-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 36px;
+  }
+
+  .primary-about-action,
+  .secondary-about-action {
+    min-width: 138px;
+    flex: 1 1 calc(50% - 5px);
+    padding-inline: 12px;
+    font-size: 0.84rem;
+  }
+
+  .research-section {
+    padding: 72px 0 56px;
+  }
+
+  .section-kicker {
+    gap: 10px;
+  }
+
+  .publication-controls {
+    gap: 14px;
+    margin-bottom: 34px;
+  }
+
+  .publication-search,
+  .alumni-search {
+    min-height: 48px;
+    padding-inline: 14px;
+  }
+
+  .publication-card {
+    min-height: 0;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .publication-card.has-publication-type {
+    padding-top: 48px;
+  }
+
+  .publication-card span.publication-type-tag {
+    left: 20px;
+  }
+
+  .publication-more-button {
+    width: 100%;
+  }
+
+  .teaching-section {
+    padding: 72px 0 28px;
+  }
+
+  .services-section,
+  .awards-section,
+  .alumni-section {
+    padding-top: 48px;
+  }
+
+  .teaching-content,
+  .services-content,
+  .awards-content {
+    margin-top: 44px;
+  }
+
+  .teaching-block,
+  .services-block,
+  .awards-block {
+    margin-top: 28px;
+  }
+
+  .teaching-block li,
+  .services-block li,
+  .awards-block li {
+    overflow-wrap: anywhere;
+  }
+
+  .alumni-heading {
+    margin-bottom: 24px;
+  }
+
+  .alumni-search {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .alumni-card {
+    padding-block: 16px;
+  }
+
+  .search-backdrop {
+    padding: 10px;
+  }
+
+  .search-panel {
+    width: 100%;
+    max-height: calc(100dvh - 20px);
+    border-radius: 16px;
+  }
+
+  .search-input-row {
+    height: 60px;
+    gap: 10px;
+    padding-inline: 14px;
+  }
+
+  .search-input-row input {
+    min-width: 0;
+    font-size: 1rem;
+  }
+
+  .search-results-list {
+    max-height: calc(100dvh - 82px);
+    padding: 12px;
+  }
+
+  .search-result {
+    grid-template-columns: 8px minmax(0, 1fr);
+    gap: 10px;
+    padding: 12px 8px;
+  }
+
+  .result-text,
+  .result-text span {
+    min-width: 0;
+  }
+
+  .result-text span {
+    flex-wrap: wrap;
+    font-size: 0.92rem;
+  }
+
+  .result-text small {
+    overflow-wrap: anywhere;
+  }
+
+  .search-result kbd {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .primary-about-action,
+  .secondary-about-action {
+    flex-basis: 100%;
+  }
+}
