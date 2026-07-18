@@ -42,10 +42,10 @@ The application is one vertically scrolling page with five navigation targets.
 | 01 | `about` | About | Implemented |
 | 02 | `research` | Research | Implemented |
 | 03 | `teaching` | Teaching | Implemented |
-| 04 | `services` | Services | Empty placeholder |
-| 05 | `awards` | Awards | Empty placeholder |
+| 04 | `services` | Services | Implemented |
+| 05 | `awards` | Awards | Implemented |
 
-The Services and Awards sections currently reserve vertical page space and are represented in navigation and global search, but do not display content.
+The Services and Awards sections are rendered and participate fully in navigation and active-section tracking.
 
 ## 5. Global layout and navigation
 
@@ -152,9 +152,9 @@ This search is independent from the global site search overlay.
 
 - A maximum of 10 matching publications is displayed initially.
 - If the active filtered collection contains more than 10 entries, a centered `Show More Publications` button appears after the timeline.
-- Activating the button reveals every matching publication and removes the button.
+- Activating `Show More Publications` reveals every matching publication and changes the control to `Hide Extra Publications` in the same centered location.
+- Activating `Hide Extra Publications` restores the 10-item view, shortens the section, and changes the control back to `Show More Publications`.
 - Expansion state persists while the Research component remains mounted, including after tab or query changes.
-- There is currently no `Show Less` action.
 
 ### 7.5 Publication timeline and links
 
@@ -182,6 +182,15 @@ The Teaching section contains two content groups.
 - Analytics Driven Design of Adaptive Systems (`BT4014`), undergraduate level, National University of Singapore.
 
 Teaching content is maintained as a local array in `src/components/TeachingSection.tsx`.
+
+### 8.3 Services and Awards
+
+- Services renders as section `04` with the `services` ID and Services-specific layout classes.
+- Awards renders as section `05` with the `awards` ID and Awards-specific layout classes.
+- Services presents university service, journal and conference editorship, and journal and conference referee activity.
+- Awards presents grants and academic or professional awards.
+- Both are mounted by `App.tsx`, receive section refs, support hotbar navigation, and participate in active-section detection.
+- Teaching, Services, and Awards size to their content rather than enforcing a full viewport height. Adjacent sections use 92 px of combined boundary padding to maintain separation without large empty gaps.
 
 ## 9. Global site search
 
@@ -303,6 +312,8 @@ Known accessibility gaps:
 | `src/components/AboutSection.tsx` | Academic profile and external/contact actions |
 | `src/components/ResearchSection.tsx` | Publication data, category filtering, inline search, limiting, expansion, and timeline rendering |
 | `src/components/TeachingSection.tsx` | Teaching interests and course history |
+| `src/components/ServicesSection.tsx` | University service, editorship, and referee activity |
+| `src/components/AwardsSection.tsx` | Grants and academic or professional awards |
 | `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
 | `src/data/siteData.ts` | Navigation IDs and global-search index |
 | `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
@@ -392,7 +403,7 @@ A release satisfies the current specification when:
 3. The All publication tab renders one merged, descending-by-year timeline.
 4. Journal and Conference tabs show only their respective publication types.
 5. Publication search filters the active category by title or author without a page reload.
-6. At most 10 publications appear before expansion, and `Show More Publications` reveals all matching entries.
+6. At most 10 publications appear before expansion, `Show More Publications` reveals all matching entries, and `Hide Extra Publications` restores the limited view.
 7. Linked publication cards open the correct external URL in a new tab.
 8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
 9. The layout remains usable at desktop, tablet, and 320 px mobile widths.
@@ -401,7 +412,7 @@ A release satisfies the current specification when:
 
 ## 16. Known gaps and maintenance notes
 
-- Services and Awards are placeholders and require content components before those areas can be considered complete.
+- The Services and Awards content arrays are still named `teachingItems` internally; renaming them would improve code clarity without changing behavior.
 - The HTML document title is currently `professorqiaodandanwebsite`; no description, social-sharing metadata, canonical URL, or structured data is configured.
 - The global search index must be updated manually when site content changes.
 - Publication search derives text from rendered citation nodes; a structured publication model with explicit `authors`, `title`, `venue`, `type`, and `year` fields would make future filtering and maintenance more reliable.
@@ -409,4 +420,3 @@ A release satisfies the current specification when:
 - `SectionShell.tsx` and several generic global style groups are currently unused.
 - There is no automated component, interaction, visual-regression, or end-to-end test suite.
 - Static content contains several spelling and capitalization inconsistencies that should be reviewed separately from functional changes.
-- Publication expansion cannot currently be collapsed without refreshing the page.

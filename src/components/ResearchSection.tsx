@@ -649,15 +649,17 @@ export const ResearchSection = forwardRef<HTMLElement>(function ResearchSection(
           </p>
         )}
 
-        {hasMorePublications && !showAllPublications && (
+        {hasMorePublications && (
           <div className="publication-more-wrap">
             <button
               type="button"
               className="publication-more-button"
-              aria-expanded="false"
-              onClick={() => setShowAllPublications(true)}
+              aria-expanded={showAllPublications}
+              onClick={() => setShowAllPublications((isExpanded) => !isExpanded)}
             >
-              Show More Publications
+              {showAllPublications
+                ? "Hide Extra Publications"
+                : "Show More Publications"}
             </button>
           </div>
         )}

@@ -4,6 +4,8 @@ import { SearchOverlay } from "./components/SearchOverlay";
 import { AboutSection } from "./components/AboutSection";
 import { ResearchSection } from "./components/ResearchSection";
 import { TeachingSection } from "./components/TeachingSection";
+import { ServicesSection } from "./components/ServicesSection";
+import { AwardsSection } from "./components/AwardsSection";
 import { navItems, type SectionId } from "./data/siteData";
 import "./styles/global.css";
 
@@ -126,20 +128,16 @@ export default function App() {
           }}
         />
 
-        <section
-          id="services"
+        <ServicesSection
           ref={(el) => {
             sectionRefs.current.services = el;
           }}
-          className="placeholder-section"
         />
 
-        <section
-          id="awards"
+        <AwardsSection
           ref={(el) => {
             sectionRefs.current.awards = el;
           }}
-          className="placeholder-section"
         />
       </main>
 
