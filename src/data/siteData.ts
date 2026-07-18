@@ -3,7 +3,8 @@ export type SectionId =
   | "research"
   | "teaching"
   | "services"
-  | "awards";
+  | "awards"
+  | "alumni";
 
 export type SearchItem = {
   id: string;
@@ -22,6 +23,7 @@ export const navItems: { id: SectionId; label: string }[] = [
   { id: "teaching", label: "Teaching" },
   { id: "services", label: "Services" },
   { id: "awards", label: "Awards" },
+  { id: "alumni", label: "Alumni" },
 ];
 
 export const searchItems: SearchItem[] = [
@@ -331,6 +333,24 @@ export const searchItems: SearchItem[] = [
       "department service",
     ],
     color: "#00a8a8",
+  },
+  {
+    id: "alumni-main",
+    sectionId: "alumni",
+    group: "Alumni",
+    title: "Alumni",
+    subtitle: "Former students and research group members",
+    keywords: [
+      "alumni",
+      "alumnus",
+      "former students",
+      "past members",
+      "students",
+      "phd students",
+      "research fellows",
+      "research assistants",
+    ],
+    color: "#d98200",
   },
   {
     id: "awards-main",

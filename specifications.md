@@ -18,6 +18,7 @@ The website must:
 - Provide a browsable and searchable record of journal and conference publications.
 - Present teaching interests and courses.
 - Provide direct access to contact, office location, school profile, and Google Scholar.
+- Present searchable alumni information in a responsive card grid.
 - Allow visitors to move between page sections without a full-page reload.
 - Remain readable and usable on desktop, tablet, and mobile screen sizes.
 
@@ -35,7 +36,7 @@ Primary audiences include:
 
 ## 4. Information architecture
 
-The application is one vertically scrolling page with five navigation targets.
+The application is one vertically scrolling page with six navigation targets.
 
 | Order | Section ID | Navigation label | Current status |
 | --- | --- | --- | --- |
@@ -44,6 +45,7 @@ The application is one vertically scrolling page with five navigation targets.
 | 03 | `teaching` | Teaching | Implemented |
 | 04 | `services` | Services | Implemented |
 | 05 | `awards` | Awards | Implemented |
+| 06 | `alumni` | Alumni | Implemented |
 
 The Services and Awards sections are rendered and participate fully in navigation and active-section tracking.
 
@@ -62,7 +64,7 @@ The hotbar remains near the top of the viewport and contains:
 
 - The current section number and label on desktop.
 - A `Qiao Dandan` brand button that navigates to About.
-- Buttons for About, Research, Teaching, Services, and Awards.
+- Buttons for About, Research, Teaching, Services, Awards, and Alumni.
 - A search button with a search icon and a visual `⌘K` hint.
 
 Behavior:
@@ -75,8 +77,8 @@ Behavior:
 
 ### 5.3 Responsive navigation
 
-- At 900 px and below, the left-side current-section indicator is hidden.
-- The navigation row becomes horizontally scrollable when it does not fit.
+- At 1,080 px and below, the left-side current-section indicator is hidden so the six section buttons have the full hotbar width.
+- Hotbar buttons never shrink, the `Qiao Dandan` brand remains on one line, and the navigation row becomes horizontally scrollable when it does not fit.
 - At 620 px and below, navigation buttons use reduced horizontal padding and the `⌘K` text is hidden while the search icon remains.
 
 ## 6. About section
@@ -165,7 +167,7 @@ This search is independent from the global site search overlay.
 - Publications without an `href` render as non-interactive articles.
 - On screens at or below 700 px, the vertical line and dot markers are hidden and rows become single-column cards.
 
-## 8. Teaching section
+## 8. Teaching, Services, Awards, and Alumni
 
 The Teaching section contains two content groups.
 
@@ -191,6 +193,19 @@ Teaching content is maintained as a local array in `src/components/TeachingSecti
 - Awards presents grants and academic or professional awards.
 - Both are mounted by `App.tsx`, receive section refs, support hotbar navigation, and participate in active-section detection.
 - Teaching, Services, and Awards size to their content rather than enforcing a full viewport height. Adjacent sections use 92 px of combined boundary padding to maintain separation without large empty gaps.
+- Teaching, Services, and Awards use a compact responsive type scale: group headings range from `1rem` to `1.25rem`, while list content ranges from `0.9rem` to `1.05rem`.
+
+### 8.4 Alumni
+
+- Alumni renders as section `06` with the `alumni` ID and participates in hotbar navigation and active-section detection.
+- A prominent, page-centered `Alumni` title appears after the section kicker using the same typography as the Research section's `All Publications` heading.
+- Alumni records are maintained in the `alumniItems` array near the top of `src/components/AlumniSection.tsx`.
+- Each record has a `name` and `description`; descriptions may contain line breaks.
+- The array is populated and can be edited directly to add, remove, or revise alumni records.
+- Alumni cards render in an arbitrary-row, three-column grid on desktop.
+- The inline search filters immediately and case-insensitively across both names and descriptions.
+- An empty array displays `Alumni information will be added soon.`; an unmatched query displays `No alumni match “{query}”.`
+- The section has a 70% viewport minimum height so the final navigation target can become active even when the data array is empty.
 
 ## 9. Global site search
 
@@ -260,10 +275,13 @@ Matching behavior:
 
 | Breakpoint | Main changes |
 | --- | --- |
+| `max-width: 1080px` | Hotbar indicator hides; navigation receives the full row and scrolls horizontally without shrinking buttons |
 | `max-width: 1000px` | Publication search and tabs stack; tabs may wrap to additional lines |
-| `max-width: 900px` | Hotbar indicator hidden; multi-column content grids collapse |
+| `max-width: 900px` | Multi-column content grids collapse |
 | `max-width: 700px` | Publication tabs use horizontal scrolling; timeline simplifies; publication cards become single-column |
 | `max-width: 620px` | Main margins and navigation padding reduce; selected multi-column cards collapse |
+
+The Alumni grid displays three columns above 900 px, two columns at 900 px and below, and one column at 620 px and below.
 
 The minimum supported layout width is 320 px as declared by the global body styles.
 
@@ -276,6 +294,7 @@ Implemented accessibility provisions include:
 - `aria-label` on page navigation and search controls.
 - Tab roles and `aria-selected` state for publication filtering.
 - A screen-reader-only label for publication search.
+- A screen-reader-only label for Alumni search and a polite live region for Alumni results.
 - `role="status"` on the publication no-results message.
 - Keyboard-focus styles on publication controls.
 - Native buttons and links for interactive elements.
@@ -314,6 +333,7 @@ Known accessibility gaps:
 | `src/components/TeachingSection.tsx` | Teaching interests and course history |
 | `src/components/ServicesSection.tsx` | University service, editorship, and referee activity |
 | `src/components/AwardsSection.tsx` | Grants and academic or professional awards |
+| `src/components/AlumniSection.tsx` | Editable alumni data, name/description search, empty states, and responsive student-card grid |
 | `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
 | `src/data/siteData.ts` | Navigation IDs and global-search index |
 | `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
@@ -336,6 +356,10 @@ Known accessibility gaps:
 - Publication query.
 - Whether the full publication collection has been expanded.
 
+`AlumniSection.tsx` owns:
+
+- Alumni search query; the editable alumni records themselves are module-level content data.
+
 All state is transient and resets on a full page refresh.
 
 ### 12.4 Content storage
@@ -344,6 +368,7 @@ All state is transient and resets on a full page refresh.
 - About content and external URLs are embedded in `AboutSection.tsx`.
 - Publication citations and URLs are embedded in `ResearchSection.tsx`.
 - Teaching content is embedded in `TeachingSection.tsx`.
+- Alumni names and descriptions are stored in the local `alumniItems` array in `AlumniSection.tsx`.
 - No content schema validation or remote content loading is present.
 
 ## 13. Assets and external destinations
@@ -398,17 +423,18 @@ On Windows systems where PowerShell script execution blocks `npm.ps1`, the equiv
 
 A release satisfies the current specification when:
 
-1. All five hotbar targets scroll to their corresponding section and the active item updates while scrolling.
+1. All six hotbar targets scroll to their corresponding section and the active item updates while scrolling.
 2. About displays the portrait, academic biography, research interests, and all five actions.
 3. The All publication tab renders one merged, descending-by-year timeline.
 4. Journal and Conference tabs show only their respective publication types.
-5. Publication search filters the active category by title or author without a page reload.
+5. Publication search filters the active category by title, author, or venue without a page reload.
 6. At most 10 publications appear before expansion, `Show More Publications` reveals all matching entries, and `Hide Extra Publications` restores the limited view.
 7. Linked publication cards open the correct external URL in a new tab.
 8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
-9. The layout remains usable at desktop, tablet, and 320 px mobile widths.
-10. `npm run build` and `npm run lint` complete successfully.
-11. The production build works from the configured GitHub Pages base path.
+9. Alumni entries render from the editable array in a three-column desktop grid, and Alumni search matches both names and descriptions.
+10. The layout remains usable at desktop, tablet, and 320 px mobile widths.
+11. `npm run build` and `npm run lint` complete successfully.
+12. The production build works from the configured GitHub Pages base path.
 
 ## 16. Known gaps and maintenance notes
 

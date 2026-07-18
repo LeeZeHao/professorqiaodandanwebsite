@@ -6,6 +6,7 @@ import { ResearchSection } from "./components/ResearchSection";
 import { TeachingSection } from "./components/TeachingSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { AwardsSection } from "./components/AwardsSection";
+import { AlumniSection } from "./components/AlumniSection";
 import { navItems, type SectionId } from "./data/siteData";
 import "./styles/global.css";
 
@@ -21,6 +22,7 @@ export default function App() {
     teaching: null,
     services: null,
     awards: null,
+    alumni: null,
   });
 
   function scrollToSection(id: SectionId) {
@@ -137,6 +139,12 @@ export default function App() {
         <AwardsSection
           ref={(el) => {
             sectionRefs.current.awards = el;
+          }}
+        />
+
+        <AlumniSection
+          ref={(el) => {
+            sectionRefs.current.alumni = el;
           }}
         />
       </main>
