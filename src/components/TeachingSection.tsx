@@ -12,9 +12,9 @@ const teachingItems = [
   {
     title: "Class Instructor / Teaching Assistant",
     details: [
-      "Computational Social Science (IS6006), PhD lelvel, National University of Singapore",
-      "Mining Business Insights from Web Data (BT4222), Undergraduate lelvel, National University of Singapore",
-      "Analytics Driven Design of Adaptive Systems (BT4014), Undergraduate lelvel, National University of Singapore",
+      "Computational Social Science (IS6006), PhD level, National University of Singapore",
+      "Mining Business Insights from Web Data (BT4222), Undergraduate level, National University of Singapore",
+      "Analytics Driven Design of Adaptive Systems (BT4014), Undergraduate level, National University of Singapore",
     ],
   },
 ];

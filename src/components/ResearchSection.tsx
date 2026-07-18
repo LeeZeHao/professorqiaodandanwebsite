@@ -1,4 +1,10 @@
-import { forwardRef, type ReactNode } from "react";
+import {
+  forwardRef,
+  isValidElement,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 type JournalPublication = {
   year: string;
@@ -133,10 +139,90 @@ const journalPublications: JournalPublication[] = [
 
 const conferencePublications: ConferencePublication[] = [
   {
+    year: "2025",
+    text: (
+      <>
+        Tong Yang, Junjing Huang, Xiaofan Li and <b>Dandan Qiao</b>, “AIGC on Marketing: A Theory-driven Design System and Empirical Evaluation”, <i>International Conference on Information Systems</i> (ICIS), Nashville, US, 2025.
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Bruce Yang, Junjing Huang, Xiaofan Li, <b>Dandan Qiao</b>, “An ADR Approach on a Multi-Agent System for Team Productivity and Coordination”, <i>International Conference on Information Systems</i> (ICIS), Nashville, US, 2025.
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>International Conference on Information Systems</i> (ICIS), Nashville, US, 2025.
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>The 85th Annual Meeting of the Academy of Management</i> (AOM), Copenhagen, Denmark, 2025
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Tong Yang, Junjing Huang, Xiaofan Li and <b>Dandan Qiao</b>, “AIGC on Marketing: A Theory-driven Design System and Empirical Evaluation”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
+      </>
+    ),
+  },
+  {
+    year: "2025",
+    text: (
+      <>
+        Gang Li, <b>Dandan Qiao</b> and Mingxuan Zheng, “Enhancing Stock Return Prediction with LLM-Extracted News Events: Accurate and Interpretable Insights”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
+      </>
+    ),
+  },
+  {
     year: "2024",
     text: (
       <>
         Haoyu Yuan, <b>Dandan Qiao</b>, Qiang Wei, “When Crowdfunding Meets InDemand: A Dynamic Analysis Using Hidden Markov Model, ” <i>International Conference on Information Systems</i> (ICIS), Bangkok, Thailand, 2024.
+      </>
+    ),
+  },
+  {
+    year: "2024",
+    text: (
+      <>
+        <b>Dandan Qiao</b>, Huaxia Rui, Qian Xiong, “AI and Freelancers: Has the Inflection Point Arrived?” <i>International Conference on Information Systems</i> (ICIS), Bankok, Thailand, 2024.
+      </>
+    ),
+  },
+  {
+    year: "2024",
+    text: (
+      <>
+        Haoyu Yuan, <b>Dandan Qiao</b>, Qiang Wei, “When Crowdfunding Meets InDemand: A Dynamic Analysis Using Hidden Markov Model” <i>Twentieth Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Lisbon, Portugal, 2024.
+      </>
+    ),
+  },
+  {
+    year: "2024",
+    text: (
+      <>
+        Qian Xiong, <b>Dandan Qiao</b>, Jingjing Li, “Understanding Impact of Social Media Brand Activism on Product Sales” <i>Twentieth Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Lisbon, Portugal, 2024.
       </>
     ),
   },
@@ -209,6 +295,14 @@ const conferencePublications: ConferencePublication[] = [
     text: (
       <>
         Jingyuan Deng, Grace Gu, <b>Dandan Qiao</b>, “Whom to Listen to and When? Empirically Studying User Innovation over Product Development Life Cycle,” <i>Seventeenth Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Madrid, Spain, June 2022.
+      </>
+    ),
+  },
+  {
+    year: "2022",
+    text: (
+      <>
+        Jingyuan Deng, Grace Gu, <b>Dandan Qiao</b>, “Whom to Listen to and When? Empirically Studying User Innovation over Product Development Life Cycle,” <i>Strategic Management Society</i> (SMS), London, UK, 2022.
       </>
     ),
   },
@@ -302,7 +396,205 @@ const conferencePublications: ConferencePublication[] = [
   },
 ];
 
+type PublicationFilter =
+  | "all"
+  | "journals"
+  | "conferences"
+  | "under-review"
+  | "working-papers";
+type PublicationCategory =
+  | "Journal"
+  | "Conference"
+  | "Under Review"
+  | "Working Paper";
+
+type TimelinePublication = {
+  year: string;
+  text: ReactNode;
+  href?: string;
+  category?: PublicationCategory;
+};
+
+const underReviewPublications: TimelinePublication[] = [
+  {
+    year: "",
+    text: (
+      <>
+        Jingyuan Deng, <b>Dandan Qiao</b>, and Warut Khern-Am- Nuai, “An Empirical Study about the Impact of Incentivized Reviews on Product Sales: The Case of Amazon Vine Program”, Invited for 3rd-Round Revision at <i>MIS Quarterly</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Jingyuan Deng, Grace Gu, <b>Dandan Qiao</b>, “Unraveling the Role of Public Crowds in Driving Innovation for Technology Product Development”, Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Haoyu Yuan, <b>Dandan Qiao</b>, Qiang Wei. “Decoding Persuasion: A Hierarchical Deep Learning Framework for Predicting Crowdfunding Success, ” Invited for 2nd-Round Review at <i>Journal of Management Information Systems</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Qian Xiong, Mingxuan Zheng, <b>Dandan Qiao</b> and Jingjing Li, “Understanding Impact of Social Media Brand Activism on Product Sales” Under Major Revision at <i>MIS Quarterly</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Jiaxu Peng, Jungpil Hahn, <b>Dandan Qiao</b>. “Predictive Analytics in Changing Environments: Trade-Offs in Response to Changes in Data Patterns”, Rejected & Resubmitted at <i>Information Systems Research</i>.
+      </>
+    ),
+  },
+];
+const workingPaperPublications: TimelinePublication[] = [
+  {
+    year: "",
+    text: (
+      <>
+        “Should We Estoppel? Exploring the Effects of Prohibiting Review Deletion” with Tong Yang, Xinxin Li. Working Paper. Under Review.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        “Unveiling the Secrets of Collaboration in Online Video Sharing Platforms” with Dinghao Xi, Ying Lu, and Wei Xu, Working Paper.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        “AI for VIP Customers: Examining Impact of AI Services on Customer Interactions” with Bin Li, Nakyung Kyung, and Luning Liu. Working Paper.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        “Modelling Collusion Dynamics in Decentralized Online Social Media” with Ying Lu, Shu He,and Bernard C Y Tan. Working Paper.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        “In Coherence We Trust: Designing an Innovative Review Ranking System” with Yiming Liu, Xiaofan Li, Working Paper.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        “Text Selection Based on Interpretable Neural Network Methods” with Gang Li. Working Paper.
+      </>
+    ),
+  },
+];
+
+const publicationFilters: Array<{
+  label: string;
+  value: PublicationFilter;
+}> = [
+  { label: "All", value: "all" },
+  { label: "Journals", value: "journals" },
+  { label: "Conferences", value: "conferences" },
+  { label: "Under Review", value: "under-review" },
+  { label: "Working Papers", value: "working-papers" },
+];
+
+const publicationHeadings: Record<PublicationFilter, string> = {
+  all: "All Publications",
+  journals: "Journal Publications",
+  conferences: "Conference Publications",
+  "under-review": "Under Review",
+  "working-papers": "Working Papers",
+};
+
+function getSearchableText(node: ReactNode): string {
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+
+  if (Array.isArray(node)) {
+    return node.map(getSearchableText).join(" ");
+  }
+
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    return getSearchableText(node.props.children);
+  }
+
+  return "";
+}
+
 export const ResearchSection = forwardRef<HTMLElement>(function ResearchSection(_, ref) {
+  const [activeFilter, setActiveFilter] = useState<PublicationFilter>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showAllPublications, setShowAllPublications] = useState(false);
+  const normalizedQuery = searchQuery.trim().toLocaleLowerCase();
+
+  const filteredPublications = useMemo(() => {
+    let publications: TimelinePublication[];
+
+    if (activeFilter === "journals") {
+      publications = journalPublications;
+    } else if (activeFilter === "conferences") {
+      publications = conferencePublications;
+    } else if (activeFilter === "under-review") {
+      publications = underReviewPublications;
+    } else if (activeFilter === "working-papers") {
+      publications = workingPaperPublications;
+    } else {
+      publications = [
+        ...journalPublications.map((publication) => ({
+          ...publication,
+          category: "Journal" as const,
+        })),
+        ...conferencePublications.map((publication) => ({
+          ...publication,
+          category: "Conference" as const,
+        })),
+        ...underReviewPublications.map((publication) => ({
+          ...publication,
+          category: "Under Review" as const,
+        })),
+        ...workingPaperPublications.map((publication) => ({
+          ...publication,
+          category: "Working Paper" as const,
+        })),
+      ].sort((a, b) => Number(b.year) - Number(a.year));
+    }
+
+    return publications.filter((publication) =>
+        getSearchableText(publication.text)
+          .toLocaleLowerCase()
+          .includes(normalizedQuery),
+      );
+  }, [activeFilter, normalizedQuery]);
+
+  const visiblePublications = showAllPublications
+    ? filteredPublications
+    : filteredPublications.slice(0, 10);
+  const hasMorePublications = filteredPublications.length > 10;
+
+  const publicationHeading = publicationHeadings[activeFilter];
+
   return (
     <section id="research" ref={ref} className="research-section">
       <div className="section-kicker">
@@ -311,34 +603,77 @@ export const ResearchSection = forwardRef<HTMLElement>(function ResearchSection(
         <div />
       </div>
 
-      <PublicationTimeline
-        title="Journal Publications"
-        items={journalPublications}
-        clickable
-      />
+      <div className="publication-controls">
+        <label className="publication-search">
+          <span className="publication-search-icon" aria-hidden="true" />
+          <span className="sr-only">
+            Search publications by title, author, or venue
+          </span>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search title, author, or venue..."
+          />
+        </label>
 
-      <PublicationTimeline
-        title="Conference Publications"
-        items={conferencePublications}
-      />
+        <div className="publication-tabs" role="tablist" aria-label="Publication type">
+          {publicationFilters.map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              role="tab"
+              aria-selected={activeFilter === filter.value}
+              className={activeFilter === filter.value ? "active" : ""}
+              onClick={() => setActiveFilter(filter.value)}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="publication-results" role="tabpanel">
+        {filteredPublications.length > 0 && (
+          <PublicationTimeline
+            title={publicationHeading}
+            items={visiblePublications}
+          />
+        )}
+
+        {filteredPublications.length === 0 && (
+          <p className="publication-empty" role="status">
+            {normalizedQuery
+              ? `No publications match “${searchQuery.trim()}”.`
+              : "No publications are available in this category yet."}
+          </p>
+        )}
+
+        {hasMorePublications && !showAllPublications && (
+          <div className="publication-more-wrap">
+            <button
+              type="button"
+              className="publication-more-button"
+              aria-expanded="false"
+              onClick={() => setShowAllPublications(true)}
+            >
+              Show More Publications
+            </button>
+          </div>
+        )}
+      </div>
     </section>
   );
 });
 
 type PublicationTimelineProps = {
   title: string;
-  items: Array<{
-    year: string;
-    text: ReactNode;
-    href?: string;
-  }>;
-  clickable?: boolean;
+  items: TimelinePublication[];
 };
 
 function PublicationTimeline({
   title,
   items,
-  clickable = false,
 }: PublicationTimelineProps) {
   return (
     <div className="publication-block">
@@ -346,8 +681,21 @@ function PublicationTimeline({
 
       <div className="publication-timeline">
         {items.map((item, index) => {
+          const cardClassName = `publication-card${
+            item.href ? " publication-card-link" : ""
+          }${item.category ? " has-publication-type" : ""}`;
+
           const cardContent = (
             <>
+              {item.category && (
+                <span
+                  className={`publication-type-tag publication-type-${item.category
+                    .toLowerCase()
+                    .replaceAll(" ", "-")}`}
+                >
+                  {item.category}
+                </span>
+              )}
               <p>{item.text}</p>
               <span>{item.year}</span>
             </>
@@ -360,9 +708,9 @@ function PublicationTimeline({
                 <i />
               </div>
 
-              {clickable && item.href ? (
+              {item.href ? (
                 <a
-                  className="publication-card publication-card-link"
+                  className={cardClassName}
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
@@ -370,7 +718,7 @@ function PublicationTimeline({
                   {cardContent}
                 </a>
               ) : (
-                <article className="publication-card">{cardContent}</article>
+                <article className={cardClassName}>{cardContent}</article>
               )}
             </div>
           );

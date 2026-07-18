@@ -1,0 +1,412 @@
+# Professor Qiao Dandan Website — Specifications
+
+## 1. Document purpose
+
+This document describes the current functional, content, visual, and technical specification for Professor Qiao Dandan's academic portfolio website. It is intended to be the reference for future design, content, development, testing, and deployment work.
+
+Status: current-state specification  
+Application type: client-side single-page website  
+Primary language: English  
+Repository package: `professorqiaodandanwebsite`  
+Configured deployment path: `/professorqiaodandanwebsite`
+
+## 2. Product goals
+
+The website must:
+
+- Present Qiao Dandan's academic profile, appointments, education, and research interests.
+- Provide a browsable and searchable record of journal and conference publications.
+- Present teaching interests and courses.
+- Provide direct access to contact, office location, school profile, and Google Scholar.
+- Allow visitors to move between page sections without a full-page reload.
+- Remain readable and usable on desktop, tablet, and mobile screen sizes.
+
+The current implementation is informational only. It has no authentication, content management system, database, analytics, server API, forms, or user-generated content.
+
+## 3. Audience
+
+Primary audiences include:
+
+- Academic peers and research collaborators.
+- Prospective Ph.D., undergraduate, and graduate students.
+- Conference and journal stakeholders.
+- NUS colleagues and administrators.
+- Visitors seeking publication, teaching, contact, or biographical information.
+
+## 4. Information architecture
+
+The application is one vertically scrolling page with five navigation targets.
+
+| Order | Section ID | Navigation label | Current status |
+| --- | --- | --- | --- |
+| 01 | `about` | About | Implemented |
+| 02 | `research` | Research | Implemented |
+| 03 | `teaching` | Teaching | Implemented |
+| 04 | `services` | Services | Empty placeholder |
+| 05 | `awards` | Awards | Empty placeholder |
+
+The Services and Awards sections currently reserve vertical page space and are represented in navigation and global search, but do not display content.
+
+## 5. Global layout and navigation
+
+### 5.1 Page shell
+
+- The main content container has a maximum width of 1,060 px, with 40 px total horizontal viewport clearance on larger screens.
+- A fixed, decorative background sits behind all content.
+- The background uses layered teal, purple, and peach radial gradients over a light linear gradient, plus a 32 px grid texture.
+- Main content begins below the sticky navigation and ends with bottom spacing.
+
+### 5.2 Sticky hotbar
+
+The hotbar remains near the top of the viewport and contains:
+
+- The current section number and label on desktop.
+- A `Qiao Dandan` brand button that navigates to About.
+- Buttons for About, Research, Teaching, Services, and Awards.
+- A search button with a search icon and a visual `⌘K` hint.
+
+Behavior:
+
+- The active navigation pill reflects the section intersecting a point 35% down the viewport.
+- Section navigation uses a custom 700 ms ease-in-out cubic scroll animation.
+- Scroll targets account for a 110 px hotbar offset.
+- Opening a section from global search closes the search overlay.
+- The `⌘K` text is currently a visual hint only; no keyboard listener opens search.
+
+### 5.3 Responsive navigation
+
+- At 900 px and below, the left-side current-section indicator is hidden.
+- The navigation row becomes horizontally scrollable when it does not fit.
+- At 620 px and below, navigation buttons use reduced horizontal padding and the `⌘K` text is hidden while the search icon remains.
+
+## 6. About section
+
+The About section is the introductory hero and must contain:
+
+- A circular profile image loaded from `public/profile.jpg` with alt text `Qiao Dandan`.
+- A status pill identifying the subject as Associate Professor, Information Systems & Analytics at the National University of Singapore.
+- The main page heading `Qiao Dandan`.
+- Position history at the National University of Singapore.
+- Education at Tsinghua University, The University of Texas at Austin, and Beijing University of Posts and Telecommunications.
+- Research topics and methodologies.
+
+The action row contains:
+
+| Action | Behavior |
+| --- | --- |
+| Research | Smooth-scrolls to the Research section |
+| COM2-04-15 | Opens the office location in Google Maps in a new tab |
+| School Page | Opens the NUS School of Computing profile in a new tab |
+| qiaodd@nus.edu.sg | Opens the visitor's email client using `mailto:` |
+| Google Scholar | Opens the Google Scholar profile in a new tab |
+
+The section is centered at the hero level, while biography lists are left-aligned. Action controls remain in a single flex row and may rely on available viewport width.
+
+## 7. Research and publications
+
+### 7.1 Publication categories
+
+The Research section contains four source categories:
+
+- Journal publications, with an optional external publication URL.
+- Conference publications, currently without external URLs.
+- Papers under review.
+- Working papers.
+
+Each publication record contains:
+
+- `year`: a string used for display and chronological sorting.
+- `text`: formatted React content containing authors, title, venue, and citation details.
+- `href`: optional external URL.
+
+Publications are maintained directly in `src/components/ResearchSection.tsx` rather than in the shared site data file or an external content source.
+
+### 7.2 Category tabs
+
+The publication controls provide five tabs:
+
+- **All**: merges every populated publication category into one timeline and sorts them by numeric year in descending order. For matching years, existing source order is preserved. Every card in this view displays its category in a small top-left tag.
+- **Journals**: displays journal publications only.
+- **Conferences**: displays conference publications only.
+- **Under Review**: displays papers currently under review.
+- **Working Papers**: displays current working papers.
+
+The category tags appear only in the All tab; cards in individual category tabs do not display them. The active tab uses a dark background and exposes its state through `aria-selected`.
+
+### 7.3 Publication search
+
+The inline publication search:
+
+- Is controlled by React component state.
+- Filters results immediately as the visitor types.
+- Is case-insensitive and trims leading and trailing whitespace.
+- Matches contiguous text within publication title, author, and venue content.
+- Includes italicized journal and conference venue names, allowing searches such as a journal title, conference title, or venue acronym when the acronym appears in the citation.
+- Applies within the currently active category tab.
+- Displays `No publications are available in this category yet.` when an empty category is opened without a search query.
+- Displays `No publications match “{query}”.` when there are no results.
+
+This search is independent from the global site search overlay.
+
+### 7.4 Result limiting and expansion
+
+- A maximum of 10 matching publications is displayed initially.
+- If the active filtered collection contains more than 10 entries, a centered `Show More Publications` button appears after the timeline.
+- Activating the button reveals every matching publication and removes the button.
+- Expansion state persists while the Research component remains mounted, including after tab or query changes.
+- There is currently no `Show Less` action.
+
+### 7.5 Publication timeline and links
+
+- Results appear as cards in a vertical timeline.
+- Each row displays the year in both the timeline marker and the card.
+- In the All tab, each card's top-left category tag identifies its source category; the currently populated Journal and Conference categories use separate accent colors.
+- Publication cards with an `href` are full-card links and open in a new tab with `rel="noreferrer"`.
+- Publications without an `href` render as non-interactive articles.
+- On screens at or below 700 px, the vertical line and dot markers are hidden and rows become single-column cards.
+
+## 8. Teaching section
+
+The Teaching section contains two content groups.
+
+### 8.1 Teaching interests
+
+- Business Analytics.
+- Platform Design.
+- Computational Social Science.
+
+### 8.2 Class Instructor / Teaching Assistant
+
+- Computational Social Science (`IS6006`), Ph.D. level, National University of Singapore.
+- Mining Business Insights from Web Data (`BT4222`), undergraduate level, National University of Singapore.
+- Analytics Driven Design of Adaptive Systems (`BT4014`), undergraduate level, National University of Singapore.
+
+Teaching content is maintained as a local array in `src/components/TeachingSection.tsx`.
+
+## 9. Global site search
+
+### 9.1 Opening and closing
+
+- The hotbar search control opens a modal-style search overlay.
+- Clicking the backdrop closes the overlay.
+- Clicking the visible `ESC` button closes the overlay.
+- Clicking inside the search panel must not close it.
+- The search input receives focus when the overlay opens.
+- Pressing the Escape key is not currently implemented.
+- The query remains in component state after closing and reopening the overlay.
+
+### 9.2 Matching
+
+Searchable entries are defined in `src/data/siteData.ts` and include:
+
+- A unique ID.
+- Destination section ID.
+- Group name.
+- Title and subtitle.
+- Keyword aliases.
+- Optional color and badge.
+
+Matching behavior:
+
+- Matching is case-insensitive.
+- Leading and trailing whitespace is ignored.
+- Multiple query words use AND semantics: every word must occur somewhere in the combined title, subtitle, group, and keyword text.
+- An empty query returns all configured search entries.
+- Results are grouped by their configured group name.
+- Selecting a result navigates to its parent section, not to an individual subsection or publication.
+- When no entries match, the overlay displays suggested example searches.
+
+### 9.3 Overlay presentation
+
+- The backdrop covers the viewport and applies blur over a translucent dark layer.
+- The panel is limited to 820 px wide and to the available viewport height.
+- Results scroll inside the panel when necessary.
+- Each result displays a colored dot, title, optional badge, subtitle, and a visual return-key hint.
+
+## 10. Visual design system
+
+### 10.1 Typography
+
+- Primary application typography uses `Inter` when locally available, followed by system UI fallbacks.
+- No web font is downloaded.
+- Major titles use responsive `clamp()` sizing and tight negative letter spacing.
+- Search metadata uses system monospace fonts.
+
+### 10.2 Color and surfaces
+
+- Primary text is near-black with gray secondary copy.
+- Blue/purple identifies Research and active timeline details.
+- Teal is used for section status and supporting accents.
+- Cards use translucent white backgrounds, subtle borders, large rounded corners, blur, and soft shadows.
+- Active publication tabs and the publication expansion button use dark navy (`#151a2a`) with white text.
+
+### 10.3 Motion and interaction
+
+- Navigation scrolling is animated.
+- Interactive cards and buttons use short hover translations and shadow/background transitions.
+- Focus-visible styles are defined for publication tabs and the expansion button.
+- The current stylesheet does not include a `prefers-reduced-motion` override.
+
+### 10.4 Responsive breakpoints
+
+| Breakpoint | Main changes |
+| --- | --- |
+| `max-width: 1000px` | Publication search and tabs stack; tabs may wrap to additional lines |
+| `max-width: 900px` | Hotbar indicator hidden; multi-column content grids collapse |
+| `max-width: 700px` | Publication tabs use horizontal scrolling; timeline simplifies; publication cards become single-column |
+| `max-width: 620px` | Main margins and navigation padding reduce; selected multi-column cards collapse |
+
+The minimum supported layout width is 320 px as declared by the global body styles.
+
+## 11. Accessibility requirements and current behavior
+
+Implemented accessibility provisions include:
+
+- Semantic `header`, `nav`, `main`, `section`, `article`, heading, list, button, link, and input elements.
+- Descriptive profile-image alt text.
+- `aria-label` on page navigation and search controls.
+- Tab roles and `aria-selected` state for publication filtering.
+- A screen-reader-only label for publication search.
+- `role="status"` on the publication no-results message.
+- Keyboard-focus styles on publication controls.
+- Native buttons and links for interactive elements.
+
+Known accessibility gaps:
+
+- The global search overlay does not declare dialog semantics, `aria-modal`, or a programmatic label.
+- Focus is not trapped in the open search overlay and is not restored explicitly on close.
+- Escape-key handling and the displayed `⌘K` shortcut are not implemented.
+- Custom animated scrolling does not honor reduced-motion preferences.
+- Publication tab elements do not implement arrow-key tablist navigation or `aria-controls` relationships.
+- The purely visual About status dot is not explicitly hidden from assistive technology.
+
+## 12. Technical architecture
+
+### 12.1 Runtime stack
+
+- React 19.
+- React DOM 19.
+- TypeScript 6.
+- Vite 8 with `@vitejs/plugin-react`.
+- `lucide-react` for interface icons.
+- No router; navigation uses section IDs and scrolling.
+- No runtime state management dependency; local React state and refs are sufficient.
+
+### 12.2 Component responsibilities
+
+| File | Responsibility |
+| --- | --- |
+| `src/main.tsx` | Mounts the React application in Strict Mode |
+| `src/App.tsx` | Composes the page, owns navigation/search state, tracks active sections, and performs animated scrolling |
+| `src/components/Hotbar.tsx` | Sticky navigation and global-search trigger |
+| `src/components/SearchOverlay.tsx` | Global indexed site search |
+| `src/components/AboutSection.tsx` | Academic profile and external/contact actions |
+| `src/components/ResearchSection.tsx` | Publication data, category filtering, inline search, limiting, expansion, and timeline rendering |
+| `src/components/TeachingSection.tsx` | Teaching interests and course history |
+| `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
+| `src/data/siteData.ts` | Navigation IDs and global-search index |
+| `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
+
+### 12.3 State ownership
+
+`App.tsx` owns:
+
+- Current active section.
+- Global search overlay visibility.
+- Element refs for every navigation section.
+
+`SearchOverlay.tsx` owns:
+
+- Global search query.
+
+`ResearchSection.tsx` owns:
+
+- Active publication category.
+- Publication query.
+- Whether the full publication collection has been expanded.
+
+All state is transient and resets on a full page refresh.
+
+### 12.4 Content storage
+
+- Navigation and global-search metadata are stored in `src/data/siteData.ts`.
+- About content and external URLs are embedded in `AboutSection.tsx`.
+- Publication citations and URLs are embedded in `ResearchSection.tsx`.
+- Teaching content is embedded in `TeachingSection.tsx`.
+- No content schema validation or remote content loading is present.
+
+## 13. Assets and external destinations
+
+Local public assets:
+
+- `public/profile.jpg`: About portrait.
+- `public/favicon.svg`: browser favicon.
+- `public/icons.svg`: additional public icon asset not currently referenced by the rendered components.
+
+External destinations:
+
+- Google Maps office location.
+- NUS School of Computing profile.
+- Google Scholar profile.
+- `mailto:qiaodd@nus.edu.sg`.
+- Journal publication pages across publisher and research-hosting domains.
+
+External HTTP links must open in a new tab where currently specified and must retain safe `rel` attributes.
+
+## 14. Build, quality, and deployment
+
+### 14.1 Commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check with project references and create a production Vite build |
+| `npm run lint` | Run ESLint across the project |
+| `npm run preview` | Preview the production build locally |
+| `npm run deploy` | Publish `dist` using `gh-pages` |
+
+On Windows systems where PowerShell script execution blocks `npm.ps1`, the equivalent `npm.cmd run <script>` command may be used.
+
+### 14.2 Build output and hosting
+
+- Production output is generated in `dist/`.
+- Vite's base path is `/professorqiaodandanwebsite`.
+- The package homepage targets `https://leezehao.github.io/professorqiaodandanwebsite/`.
+- Deployment uses the `gh-pages` package.
+- The application must remain compatible with static hosting and must not require server-side URL rewriting.
+
+### 14.3 TypeScript and browser target
+
+- Compilation targets ES2023 and DOM APIs.
+- JSX uses the automatic React JSX transform.
+- Module resolution uses bundler mode.
+- Unused locals and parameters are TypeScript errors.
+- Emission is handled by Vite; TypeScript performs type-checking only.
+
+## 15. Acceptance criteria
+
+A release satisfies the current specification when:
+
+1. All five hotbar targets scroll to their corresponding section and the active item updates while scrolling.
+2. About displays the portrait, academic biography, research interests, and all five actions.
+3. The All publication tab renders one merged, descending-by-year timeline.
+4. Journal and Conference tabs show only their respective publication types.
+5. Publication search filters the active category by title or author without a page reload.
+6. At most 10 publications appear before expansion, and `Show More Publications` reveals all matching entries.
+7. Linked publication cards open the correct external URL in a new tab.
+8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
+9. The layout remains usable at desktop, tablet, and 320 px mobile widths.
+10. `npm run build` and `npm run lint` complete successfully.
+11. The production build works from the configured GitHub Pages base path.
+
+## 16. Known gaps and maintenance notes
+
+- Services and Awards are placeholders and require content components before those areas can be considered complete.
+- The HTML document title is currently `professorqiaodandanwebsite`; no description, social-sharing metadata, canonical URL, or structured data is configured.
+- The global search index must be updated manually when site content changes.
+- Publication search derives text from rendered citation nodes; a structured publication model with explicit `authors`, `title`, `venue`, `type`, and `year` fields would make future filtering and maintenance more reliable.
+- `src/index.css` and `src/App.css` retain Vite starter styles. `src/index.css` is imported before the active global stylesheet, while `src/App.css` is not imported. Consolidation would reduce conflicting or obsolete styles.
+- `SectionShell.tsx` and several generic global style groups are currently unused.
+- There is no automated component, interaction, visual-regression, or end-to-end test suite.
+- Static content contains several spelling and capitalization inconsistencies that should be reviewed separately from functional changes.
+- Publication expansion cannot currently be collapsed without refreshing the page.
