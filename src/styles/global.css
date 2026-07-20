@@ -1179,31 +1179,38 @@ a {
   padding-left: 0.25rem;
 }
 
-.alumni-section {
+.students-section {
   min-height: 70vh;
   padding: 56px 0 80px;
   scroll-margin-top: 120px;
   text-align: left;
 }
 
-.alumni-content {
+.students-content {
   width: min(1040px, calc(100vw - 72px));
   margin: 0 auto;
 }
 
-.alumni-heading {
+.students-heading {
   margin-left: 0;
   text-align: center;
 }
 
-.alumni-search {
-  width: min(520px, 100%);
+.student-controls {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 28px;
+}
+
+.student-search {
+  width: 100%;
   min-height: 52px;
   display: grid;
   grid-template-columns: 20px 1fr;
   align-items: center;
   gap: 12px;
-  margin-bottom: 28px;
   padding: 0 18px;
   border: 1px solid rgba(20, 20, 20, 0.12);
   border-radius: 14px;
@@ -1214,12 +1221,12 @@ a {
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.alumni-search:focus-within {
+.student-search:focus-within {
   border-color: rgba(217, 130, 0, 0.55);
   box-shadow: 0 0 0 3px rgba(217, 130, 0, 0.1);
 }
 
-.alumni-search input {
+.student-search input {
   width: 100%;
   border: 0;
   outline: 0;
@@ -1227,11 +1234,42 @@ a {
   background: transparent;
 }
 
-.alumni-search input::placeholder {
+.student-search input::placeholder {
   color: #777;
 }
 
-.alumni-grid {
+.student-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.student-tabs button {
+  min-width: 104px;
+  padding: 0 20px;
+  border: 1px solid rgba(20, 20, 20, 0.12);
+  border-radius: 14px;
+  color: #4d4d4d;
+  background: rgba(255, 255, 255, 0.48);
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.student-tabs button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.student-tabs button.active {
+  color: #fff;
+  border-color: #151a2a;
+  background: #151a2a;
+}
+
+.student-tabs button:focus-visible {
+  outline: 3px solid rgba(217, 130, 0, 0.22);
+  outline-offset: 2px;
+}
+
+.students-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 28px;
@@ -1244,13 +1282,44 @@ a {
   backdrop-filter: blur(18px);
 }
 
-.alumni-card {
+.student-card {
+  position: relative;
   min-width: 0;
   padding: 18px 0;
   border-bottom: 1px solid rgba(20, 20, 20, 0.08);
 }
 
-.alumni-card h2 {
+.student-card.has-status-tag {
+  padding-top: 46px;
+}
+
+.student-status-tag {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  padding: 4px 9px;
+  border: 1px solid;
+  border-radius: 7px;
+  font-size: 0.67rem;
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.student-status-alumni {
+  color: #5f35c9;
+  border-color: rgba(95, 53, 201, 0.24);
+  background: rgba(124, 77, 255, 0.1);
+}
+
+.student-status-current {
+  color: #087f78;
+  border-color: rgba(8, 127, 120, 0.24);
+  background: rgba(8, 155, 145, 0.1);
+}
+
+.student-card h2 {
   margin: 0 0 5px;
   color: #20242d;
   font-size: 0.96rem;
@@ -1258,7 +1327,7 @@ a {
   font-weight: 750;
 }
 
-.alumni-card p {
+.student-card p {
   margin: 0;
   color: #59616f;
   font-size: 0.88rem;
@@ -1266,7 +1335,7 @@ a {
   white-space: pre-line;
 }
 
-.alumni-empty {
+.students-empty {
   grid-column: 1 / -1;
   margin: 0;
   padding: 42px 20px;
@@ -1275,17 +1344,39 @@ a {
 }
 
 @media (max-width: 900px) {
-  .alumni-grid {
+  .student-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .student-tabs {
+    flex-wrap: wrap;
+  }
+
+  .students-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 620px) {
-  .alumni-content {
+  .students-content {
     width: 100%;
   }
 
-  .alumni-grid {
+  .student-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: thin;
+  }
+
+  .student-tabs button {
+    min-width: max-content;
+    min-height: 46px;
+    flex: 1 0 auto;
+    padding-inline: 16px;
+  }
+
+  .students-grid {
     grid-template-columns: 1fr;
     padding-inline: 20px;
     border-radius: 20px;
@@ -1408,7 +1499,7 @@ a {
   }
 
   .publication-search,
-  .alumni-search {
+  .student-search {
     min-height: 48px;
     padding-inline: 14px;
   }
@@ -1437,7 +1528,7 @@ a {
 
   .services-section,
   .awards-section,
-  .alumni-section {
+  .students-section {
     padding-top: 48px;
   }
 
@@ -1459,17 +1550,25 @@ a {
     overflow-wrap: anywhere;
   }
 
-  .alumni-heading {
+  .students-heading {
     margin-bottom: 24px;
   }
 
-  .alumni-search {
+  .student-search {
     width: 100%;
+  }
+
+  .student-controls {
+    gap: 14px;
     margin-bottom: 20px;
   }
 
-  .alumni-card {
+  .student-card {
     padding-block: 16px;
+  }
+
+  .student-card.has-status-tag {
+    padding-top: 44px;
   }
 
   .search-backdrop {

@@ -6,7 +6,7 @@ import { ResearchSection } from "./components/ResearchSection";
 import { TeachingSection } from "./components/TeachingSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { AwardsSection } from "./components/AwardsSection";
-import { AlumniSection } from "./components/AlumniSection";
+import { StudentsSection } from "./components/StudentsSection";
 import { navItems, type SectionId } from "./data/siteData";
 import "./styles/global.css";
 
@@ -22,7 +22,7 @@ export default function App() {
     teaching: null,
     services: null,
     awards: null,
-    alumni: null,
+    students: null,
   });
 
   function scrollToSection(id: SectionId) {
@@ -65,6 +65,14 @@ export default function App() {
   useEffect(() => {
     function updateActiveSection() {
       const triggerY = window.innerHeight * 0.35;
+      const pageBottom = window.scrollY + window.innerHeight;
+      const isAtPageBottom =
+        pageBottom >= document.documentElement.scrollHeight - 4;
+
+      if (isAtPageBottom) {
+        setActiveSection(navItems[navItems.length - 1].id);
+        return;
+      }
 
       let currentSection: SectionId = "about";
 
@@ -142,9 +150,9 @@ export default function App() {
           }}
         />
 
-        <AlumniSection
+        <StudentsSection
           ref={(el) => {
-            sectionRefs.current.alumni = el;
+            sectionRefs.current.students = el;
           }}
         />
       </main>
