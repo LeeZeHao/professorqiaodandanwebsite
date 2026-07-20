@@ -25,7 +25,7 @@ const journalPublications: JournalPublication[] = [
         Jinghui Zhang, Mochen Yang, <b>Dandan Qiao</b>, Qiang Wei. "Regurgitative Training: The Value of Real Data in Training Large Language Models". <i>Management Science</i>, Forthcoming.
       </>
     ),
-    href: "https://arxiv.org/abs/2407.12835",
+    href: "https://pubsonline.informs.org/doi/10.1287/mnsc.2024.07005",
   },
   {
     year: "2026",
@@ -61,7 +61,7 @@ const journalPublications: JournalPublication[] = [
         Warut Khern-am-nuai, Hossein Ghasemkhani, <b>Dandan Qiao</b>, Karthik Natarajan Kannan. (2024) “The Impact of Online Q&As on Product Sales: The Case of Amazon Answer”, <i>Information Systems Research</i>, 35(2), 747-765.
       </>
     ),
-    href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2794149",
+    href: "https://pubsonline.informs.org/doi/10.1287/isre.2023.1233",
   },
   {
     year: "2024",
@@ -70,7 +70,7 @@ const journalPublications: JournalPublication[] = [
         Jason Chan, Shu He, <b>Dandan Qiao</b>. Andrew B. Whinston. (2024). “Shedding Light on the Dark: The Impact of Legal Enforcement on Darknet Transactions”, <i>Information Systems Research</i>, 35(1), 145-164.
       </>
     ),
-    href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3468426",
+    href: "https://pubsonline.informs.org/doi/10.1287/isre.2023.1222",
   },
   {
     year: "2023",
@@ -88,7 +88,7 @@ const journalPublications: JournalPublication[] = [
         <b>Dandan Qiao</b>, Shun-Yang Lee, Andrew B. Whinston, Qiang Wei, (2021). “Mitigating the Adverse Effect of Monetary Incentives on Voluntary Contributions Online”. <i>Journal of Management Information Systems</i>, 38(1), pp.82-107.
       </>
     ),
-    href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3954687",
+    href: "https://www.tandfonline.com/doi/full/10.1080/07421222.2021.1870385",
   },
   {
     year: "2020",
@@ -97,7 +97,7 @@ const journalPublications: JournalPublication[] = [
         <b>Dandan Qiao</b>, Shun-Yang Lee, Andrew B. Whinston, Qiang Wei, (2020). “Financial Incentives Dampen Altruism in Online Prosocial Contributions: A Study of Online Reviews”. <i>Information Systems Research</i>, 31(4), pp.1361-1375.
       </>
     ),
-    href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3683253",
+    href: "https://pubsonline.informs.org/doi/10.1287/isre.2020.0949",
   },
   {
     year: "2020",
@@ -158,7 +158,7 @@ const conferencePublications: ConferencePublication[] = [
     year: "2025",
     text: (
       <>
-        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>International Conference on Information Systems</i> (ICIS), Nashville, US, 2025.
+        Jingyuan Deng, Aditya Karanam, and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>International Conference on Information Systems</i> (ICIS), Nashville, US, 2025.
       </>
     ),
   },
@@ -166,7 +166,7 @@ const conferencePublications: ConferencePublication[] = [
     year: "2025",
     text: (
       <>
-        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>The 85th Annual Meeting of the Academy of Management</i> (AOM), Copenhagen, Denmark, 2025
+        Jingyuan Deng, Aditya Karanam and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>The 85th Annual Meeting of the Academy of Management</i> (AOM), Copenhagen, Denmark, 2025
       </>
     ),
   },
@@ -182,7 +182,7 @@ const conferencePublications: ConferencePublication[] = [
     year: "2025",
     text: (
       <>
-        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
+        Jingyuan Deng, Aditya Karanam and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
       </>
     ),
   },
@@ -462,14 +462,6 @@ const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “Should We Estoppel? Exploring the Effects of Prohibiting Review Deletion” with Tong Yang, Xinxin Li. Working Paper. Under Review.
-      </>
-    ),
-  },
-  {
-    year: "",
-    text: (
-      <>
         “Unveiling the Secrets of Collaboration in Online Video Sharing Platforms” with Dinghao Xi, Ying Lu, and Wei Xu, Working Paper.
       </>
     ),
@@ -502,9 +494,10 @@ const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “Text Selection Based on Interpretable Neural Network Methods” with Gang Li. Working Paper.
+        "Structured Event Representation and Stock Return Predictability" with Bing Han, Gang Li, and Mingxuan Zheng, Working paper. 
       </>
     ),
+    href: "https://arxiv.org/abs/2512.19484"
   },
 ];
 

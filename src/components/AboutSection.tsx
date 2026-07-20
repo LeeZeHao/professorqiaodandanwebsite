@@ -23,7 +23,7 @@ export const AboutSection = forwardRef<HTMLElement, AboutSectionProps>(
           Associate Professor, Information Systems & Analytics @ National University of Singapore
         </div>
 
-        <h1 className="about-title">Qiao Dandan</h1>
+        <h1 className="about-title">Dandan Qiao</h1>
 
         <div className="about-content">
           <div className="about-block">

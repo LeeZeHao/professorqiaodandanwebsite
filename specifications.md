@@ -254,6 +254,7 @@ Matching behavior:
 - Primary application typography uses `Inter` when locally available, followed by system UI fallbacks.
 - No web font is downloaded.
 - Major titles use responsive `clamp()` sizing and tight negative letter spacing.
+- The About hero name uses a responsive `3.4rem–6.2rem` desktop scale and a reduced `2.4rem–3.4rem` mobile scale.
 - Search metadata uses system monospace fonts.
 
 ### 10.2 Color and surfaces

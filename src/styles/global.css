@@ -585,7 +585,7 @@ a {
   max-width: 980px;
   margin: 58px 0 26px;
   color: #090909;
-  font-size: clamp(4rem, 9.5vw, 7.4rem);
+  font-size: clamp(3.4rem, 8vw, 6.2rem);
   line-height: 0.98;
   letter-spacing: -0.085em;
   font-weight: 500;
@@ -1356,7 +1356,7 @@ a {
 
   .about-title {
     margin: 36px 0 18px;
-    font-size: clamp(2.75rem, 16vw, 4rem);
+    font-size: clamp(2.4rem, 14vw, 3.4rem);
     letter-spacing: -0.07em;
   }
 
