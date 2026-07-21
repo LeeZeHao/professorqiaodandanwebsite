@@ -13,17 +13,22 @@ const studentItems: StudentItem[] = [
   // Add students here. Use status: "Current" or status: "Alumni".
   {
     name: "Ying Lu",
-    description: "Former: Teaching Assistant\nCurrent: Assistant Professor, IE University, Spain",
+    description: "Former: PhD\nCurrent: Assistant Professor, IE University, Spain",
     status: "Alumni",
   },
   {
     name: "Haoyu Yuan",
-    description: "Former: Visiting Scholar\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
+    description: "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
     status: "Alumni",
   },
   {
     name: "Dinghao Xi",
-    description: "Former: Visiting Scholar, Information Systems and Analytics\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
+    description: "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
+    status: "Alumni",
+  },
+  {
+    name: "Qian Xiong",
+    description: "Former: Visiting Student",
     status: "Alumni",
   },
   {
