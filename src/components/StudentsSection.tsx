@@ -34,22 +34,22 @@ const studentItems: StudentItem[] = [
   {
     name: "Yiming Liu",
     description: "PhD, NUS",
-    status: "Alumni",
+    status: "Current",
   },
   {
     name: "Jingyuan Deng",
     description: "PhD, NUS",
-    status: "Alumni",
+    status: "Current",
   },
   {
     name: "Duofeng Xu",
     description: "PhD, NUS",
-    status: "Alumni",
+    status: "Current",
   },
   {
     name: "Wei Zhang",
     description: "PhD, NUS",
-    status: "Alumni",
+    status: "Current",
   },
   {
     name: "Dingyu Shi",
