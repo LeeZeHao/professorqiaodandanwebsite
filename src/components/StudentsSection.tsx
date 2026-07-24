@@ -42,16 +42,6 @@ const studentItems: StudentItem[] = [
     status: "Current",
   },
   {
-    name: "Duofeng Xu",
-    description: "PhD, NUS",
-    status: "Current",
-  },
-  {
-    name: "Wei Zhang",
-    description: "PhD, NUS",
-    status: "Current",
-  },
-  {
     name: "Dingyu Shi",
     description: "PhD Student\nResearch Interest: Digital Marketing, Econometrics",
     status: "Current",
@@ -64,6 +54,16 @@ const studentItems: StudentItem[] = [
   {
     name: "Mingxuan Zheng",
     description: "PhD Student\nResearch Interest: Explainable AI, Fintech, LLM",
+    status: "Current",
+  },
+    {
+    name: "Duofeng Xu",
+    description: "PhD, NUS",
+    status: "Current",
+  },
+  {
+    name: "Wei Zhang",
+    description: "PhD, NUS",
     status: "Current",
   },
 ];
