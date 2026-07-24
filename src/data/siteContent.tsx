@@ -13,25 +13,6 @@ export type ContentGroup = {
   details: ReactNode[];
 };
 
-export type StudentStatus = "Alumni" | "Current";
-
-export type StudentItem = {
-  name: string;
-  description: string;
-  status: StudentStatus;
-};
-
-export type SearchItem = {
-  id: string;
-  sectionId: SectionId;
-  group: string;
-  title: string;
-  subtitle: string;
-  keywords: string[];
-  color?: string;
-  badge?: string;
-};
-
 export const siteContent = {
   siteTitle: "Dandan Qiao",
   brandLabel: "Qiao Dandan",
@@ -232,117 +213,6 @@ export const siteContent = {
 } as const;
 
 export const navItems = siteContent.navigation;
-
-export const searchItems: SearchItem[] = [
-  {
-    id: "about-profile",
-    sectionId: "about",
-    group: "Jump to",
-    title: "About Dandan Qiao",
-    subtitle: "Profile, position, education, and research interests",
-    keywords: [
-      "about",
-      "profile",
-      "biography",
-      "associate professor",
-      "information systems",
-      "analytics",
-      "nus",
-      "tsinghua",
-      "education",
-      "contact",
-    ],
-    color: "#00a878",
-  },
-  {
-    id: "research-publications",
-    sectionId: "research",
-    group: "Research",
-    title: "Publications",
-    subtitle:
-      "Journal articles, conference papers, papers under review, and working papers",
-    keywords: [
-      "research",
-      "publications",
-      "journals",
-      "conferences",
-      "under review",
-      "working papers",
-      "management science",
-      "misq",
-      "isr",
-      "icis",
-      "ai",
-      "platform",
-    ],
-    color: "#7c4dff",
-  },
-  {
-    id: "teaching",
-    sectionId: "teaching",
-    group: "Teaching",
-    title: "Teaching",
-    subtitle: "Teaching interests and course instruction",
-    keywords: [
-      "teaching",
-      "courses",
-      "business analytics",
-      "platform design",
-      "computational social science",
-      "is6006",
-      "bt4222",
-      "bt4014",
-    ],
-    color: "#ff9f1c",
-  },
-  {
-    id: "services",
-    sectionId: "services",
-    group: "Services",
-    title: "Academic Service",
-    subtitle: "University, editorial, journal, and conference service",
-    keywords: [
-      "services",
-      "editor",
-      "reviewer",
-      "referee",
-      "conference",
-      "journal",
-      "committee",
-    ],
-    color: "#00a8a8",
-  },
-  {
-    id: "awards",
-    sectionId: "awards",
-    group: "Awards",
-    title: "Awards and Grants",
-    subtitle: "Research awards, grants, scholarships, and recognition",
-    keywords: [
-      "awards",
-      "grants",
-      "scholarships",
-      "recognition",
-      "research award",
-    ],
-    color: "#f05a28",
-  },
-  {
-    id: "students",
-    sectionId: "students",
-    group: "Students",
-    title: "Students",
-    subtitle: "Current students and alumni",
-    keywords: [
-      "students",
-      "current",
-      "alumni",
-      "phd",
-      "research interests",
-    ],
-    color: "#d98200",
-  },
-];
 
 export type PublicationCategory =
   | "Journal"
@@ -822,6 +692,14 @@ export const workingPaperPublications: TimelinePublication[] = [
     href: "https://arxiv.org/abs/2512.19484"
   },
 ];
+
+export type StudentStatus = "Alumni" | "Current";
+
+export type StudentItem = {
+  name: string;
+  description: string;
+  status: StudentStatus;
+};
 
 export const studentItems: StudentItem[] = [
   {

@@ -223,22 +223,23 @@ Teaching content is maintained under `siteContent.teaching.groups` in `src/data/
 
 ### 9.2 Matching
 
-Searchable entries are defined alongside the rest of the content in `src/data/siteContent.tsx` and include:
+The global search index is generated automatically by `SearchOverlay.tsx` from:
 
-- A unique ID.
-- Destination section ID.
-- Group name.
-- Title and subtitle.
-- Keyword aliases.
-- Optional color and badge.
+- The About, Teaching, Services, Awards, and Students content objects in `siteContent`.
+- Every record in the top-level `studentItems` array.
+- Every record in `journalPublications`, `conferencePublications`, `underReviewPublications`, and `workingPaperPublications`.
+
+There is no manually maintained `searchItems` array. React-formatted content is converted to plain searchable text while retaining its displayed formatting at the original section.
+
+Generated results include section overviews, individual content groups, individual students, and individual publications. Each entry receives a stable destination section, generated display metadata, and the corresponding section color.
 
 Matching behavior:
 
 - Matching is case-insensitive.
 - Leading and trailing whitespace is ignored.
-- Multiple query words use AND semantics: every word must occur somewhere in the combined title, subtitle, group, and keyword text.
-- An empty query returns all configured search entries.
-- Results are grouped by their configured group name.
+- Multiple query words use AND semantics: every word must occur somewhere in the generated title, subtitle, group, or source-content text.
+- An empty query returns the six section-overview entries rather than the full publication and student collections.
+- Results are grouped by section or publication category.
 - Selecting a result navigates to its parent section, not to an individual subsection or publication.
 - When no entries match, the overlay displays suggested example searches.
 
@@ -340,7 +341,7 @@ Known accessibility gaps:
 | `src/main.tsx` | Mounts the React application in Strict Mode |
 | `src/App.tsx` | Composes the page, owns navigation/search state, tracks active sections, and performs animated scrolling |
 | `src/components/Hotbar.tsx` | Sticky navigation and global-search trigger |
-| `src/components/SearchOverlay.tsx` | Global indexed site search |
+| `src/components/SearchOverlay.tsx` | Generates the global index from central content and owns query matching, grouping, and result rendering |
 | `src/components/AboutSection.tsx` | Renders the academic profile and external/contact actions from central content |
 | `src/components/ResearchSection.tsx` | Research section presentation, category configuration, filtering, inline search, limiting, expansion, and timeline rendering |
 | `src/components/TeachingSection.tsx` | Renders teaching interests and course history from central content |
@@ -348,7 +349,7 @@ Known accessibility gaps:
 | `src/components/AwardsSection.tsx` | Renders grants and academic or professional awards from central content |
 | `src/components/StudentsSection.tsx` | Status tabs, name/description search, empty states, and responsive rendering of central student records |
 | `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
-| `src/data/siteContent.tsx` | Central data source for the document title, navigation, non-Research section copy, external links, publication arrays, students, shared UI labels, and global-search entries |
+| `src/data/siteContent.tsx` | Central data source for the document title, navigation, non-Research section copy, external links, publication arrays, students, and shared UI labels |
 | `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
 
 ### 12.3 State ownership
@@ -388,7 +389,7 @@ The central module contains:
 - `siteContent.students` for section labels, filter labels, and student-card labels.
 - `studentItems` for the complete student record collection, separate from the `siteContent` object in the same style as the publication arrays.
 - `journalPublications`, `conferencePublications`, `underReviewPublications`, and `workingPaperPublications` for publication records.
-- `searchItems` and `siteContent.search` for global-search entries and interface copy.
+- `siteContent.search` for global-search interface copy; searchable entries are derived automatically from the other content.
 
 The file uses a `.tsx` extension because some About details and publication citations contain React fragments for bold and italic formatting. Content remains statically bundled; there is no CMS, database, runtime content fetch, or schema-validation service.
 
@@ -400,7 +401,7 @@ The file uses a `.tsx` extension because some About details and publication cita
 - Student `status` must be exactly `Current` or `Alumni`; descriptions may contain `\n` line breaks.
 - Publication `year` remains a string, `text` contains the formatted citation, and `href` is optional.
 - Add a publication to exactly one source array. The All view is generated automatically.
-- When a major content area changes, update its corresponding `searchItems` keywords or subtitle in the same central file.
+- New section groups, students, and publications become searchable automatically; no separate search-index maintenance is required.
 - Components in `src/components` are presentation and interaction code. `ResearchSection.tsx` also owns Research-specific interface labels, but publication records must remain in `siteContent.tsx`.
 
 ## 13. Assets and external destinations
@@ -471,7 +472,7 @@ A release satisfies the current specification when:
 ## 16. Known gaps and maintenance notes
 
 - The document title is set from `siteContent.siteTitle`; no description, social-sharing metadata, canonical URL, or structured data is configured.
-- The global search index remains manually curated, but it now lives beside all other editable content in `siteContent.tsx`.
+- Global search navigates generated student and publication results to their parent section rather than scrolling to or highlighting the exact record.
 - Publication search derives text from rendered citation nodes; a structured publication model with explicit `authors`, `title`, `venue`, `type`, and `year` fields would make future filtering and maintenance more reliable.
 - `src/index.css` and `src/App.css` retain Vite starter styles. `src/index.css` is imported before the active global stylesheet, while `src/App.css` is not imported. Consolidation would reduce conflicting or obsolete styles.
 - `SectionShell.tsx` and several generic global style groups are currently unused.
