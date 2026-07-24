@@ -65,28 +65,46 @@ function StudentSubsection({
       </div>
 
       <div className="students-grid" aria-live="polite">
-        {filteredItems.map((student) => (
-          <article
-            className="student-card"
-            key={`${student.name}-${student.description}`}
-          >
-            <img
-              className="student-picture"
-              src={student.picture ?? "default-profile.svg"}
-              alt={
-                student.picture
-                  ? (student.pictureAlt ?? student.name)
-                  : ""
-              }
-            />
-            <h2>{student.name}</h2>
-            <span className="student-years">
-              {student.startYear}
-              {student.endYear ? `–${student.endYear}` : ""}
-            </span>
-            <p>{student.description}</p>
-          </article>
-        ))}
+        {filteredItems.map((student) => {
+          const cardContent = (
+            <>
+              <img
+                className="student-picture"
+                src={student.picture ?? "default-profile.svg"}
+                alt={
+                  student.picture
+                    ? (student.pictureAlt ?? student.name)
+                    : ""
+                }
+              />
+              <h2>{student.name}</h2>
+              <span className="student-years">
+                {student.startYear}
+                {student.endYear ? `–${student.endYear}` : ""}
+              </span>
+              <p>{student.description}</p>
+            </>
+          );
+
+          return student.profileUrl ? (
+            <a
+              className="student-card student-card-link"
+              href={student.profileUrl}
+              target="_blank"
+              rel="noreferrer"
+              key={`${student.name}-${student.description}`}
+            >
+              {cardContent}
+            </a>
+          ) : (
+            <article
+              className="student-card"
+              key={`${student.name}-${student.description}`}
+            >
+              {cardContent}
+            </article>
+          );
+        })}
 
         {filteredItems.length === 0 && (
           <p className="students-empty">

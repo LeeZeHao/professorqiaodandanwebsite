@@ -703,6 +703,7 @@ export type StudentItem = {
   endYear?: number;
   picture?: string;
   pictureAlt?: string;
+  profileUrl?: string;
 };
 
 export const alumniItems: StudentItem[] = [
@@ -714,6 +715,7 @@ export const alumniItems: StudentItem[] = [
     endYear: 2025,
     picture: "alumni/ying-lu.webp",
     pictureAlt: "Ying Lu",
+    profileUrl: "https://www.ie.edu/university/about/faculty/ying-lu/",
   },
   {
     name: "Haoyu Yuan",
@@ -723,6 +725,7 @@ export const alumniItems: StudentItem[] = [
     endYear: 2024,
     picture: "alumni/haoyu-yuan.png",
     pictureAlt: "Haoyu Yuan",
+    profileUrl: "https://sime.sufe.edu.cn/99/3f/c10574a235839/page.htm",
   },
   {
     name: "Dinghao Xi",
@@ -732,6 +735,7 @@ export const alumniItems: StudentItem[] = [
     endYear: 2023,
     picture: "alumni/dinghao-xi.jpg",
     pictureAlt: "Dinghao Xi",
+    profileUrl: "https://dinghaoxi.github.io/",
   },
   {
     name: "Qian Xiong",
@@ -740,6 +744,7 @@ export const alumniItems: StudentItem[] = [
     endYear: 2023,
     picture: "alumni/qian-xiong.jpg",
     pictureAlt: "Qian Xiong",
+    profileUrl: "https://www.linkedin.com/in/qian-xiong-128a921b3/",
   },
 ];
 
@@ -757,6 +762,7 @@ export const studentItems: StudentItem[] = [
     startYear: 2021,
     picture: "students/jingyuan-deng.avif",
     pictureAlt: "Jingyuan Deng",
+    profileUrl: "https://sites.google.com/view/jingyuandeng/home/",
   },
   {
     name: "Dingyu Shi",
@@ -765,6 +771,7 @@ export const studentItems: StudentItem[] = [
     startYear: 2023,
     picture: "students/dingyu-shi.jpg",
     pictureAlt: "Dingyu Shi",
+    profileUrl: "https://www.linkedin.com/in/dingyu-shi-02214331b/",
   },
   {
     name: "Yingfei Shi",
@@ -773,6 +780,7 @@ export const studentItems: StudentItem[] = [
     startYear: 2023,
     picture: "students/yingfei-shi.jpg",
     pictureAlt: "Yingfei Shi",
+    profileUrl: "https://www.linkedin.com/in/yingfei-shi-4609a8195/",
   },
   {
     name: "Mingxuan Zheng",
@@ -781,6 +789,7 @@ export const studentItems: StudentItem[] = [
     startYear: 2023,
     picture: "students/mingxuan-zheng.jpg",
     pictureAlt: "Mingxuan Zheng",
+    profileUrl: "https://www.linkedin.com/in/mingxuan-zheng-6a0613330/",
   },
   {
     name: "Duofeng Xu",
@@ -788,6 +797,7 @@ export const studentItems: StudentItem[] = [
     startYear: 2025,
     picture: "students/duofeng-xu.jpg",
     pictureAlt: "Duofeng Xu",
+    profileUrl: "https://www.linkedin.com/in/xu-duofeng-72202716b/",
   },
   {
     name: "Wei Zhang",
@@ -795,5 +805,6 @@ export const studentItems: StudentItem[] = [
     startYear: 2025,
     picture: "students/wei-zhang.jpg",
     pictureAlt: "Wei Zhang",
+    profileUrl: "https://www.linkedin.com/in/wei-zhang-a22802380/",
   },
 ];
