@@ -184,19 +184,22 @@ export const siteContent = {
   students: {
     sectionNumber: "06",
     sectionTitle: "Students",
-    heading: "Students",
-    searchLabel: "Search students by name or description",
-    searchPlaceholder: "Search name or description...",
-    filters: [
-      { label: "All", value: "all" },
-      { label: "Alumni", value: "alumni" },
-      { label: "Current", value: "current" },
-    ],
-    currentTag: "Student",
-    alumniTag: "Alumni",
-    filtersLabel: "Student status",
-    noMatchesPrefix: "No students match",
-    emptySuffix: "students are available yet.",
+    subsections: {
+      alumni: {
+        heading: "Alumni",
+        searchLabel: "Search alumni by name or description",
+        searchPlaceholder: "Search alumni...",
+        noMatchesPrefix: "No alumni match",
+        emptyMessage: "No alumni are available yet.",
+      },
+      students: {
+        heading: "Students",
+        searchLabel: "Search students by name or description",
+        searchPlaceholder: "Search students...",
+        noMatchesPrefix: "No students match",
+        emptyMessage: "No students are available yet.",
+      },
+    },
   },
   search: {
     placeholder: "Search...",
@@ -693,58 +696,81 @@ export const workingPaperPublications: TimelinePublication[] = [
   },
 ];
 
-export type StudentStatus = "Alumni" | "Current";
-
 export type StudentItem = {
   name: string;
   description: string;
-  status: StudentStatus;
+  startYear: number;
+  endYear?: number;
 };
 
-export const studentItems: StudentItem[] = [
+export const alumniItems: StudentItem[] = [
+  // TODO: Replace these placeholder years with verified dates.
   {
     name: "Ying Lu",
     description:
       "Former: PhD\nCurrent: Assistant Professor, IE University, Spain",
-    status: "Alumni",
+    startYear: 2019,
+    endYear: 2025,
   },
   {
     name: "Haoyu Yuan",
     description:
       "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
-    status: "Alumni",
+    startYear: 2023,
+    endYear: 2024,
   },
   {
     name: "Dinghao Xi",
     description:
       "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
-    status: "Alumni",
+    startYear: 2022,
+    endYear: 2023,
   },
   {
     name: "Qian Xiong",
     description: "Former: Visiting Student",
-    status: "Alumni",
+    startYear: 2022,
+    endYear: 2023,
   },
-  { name: "Yiming Liu", description: "PhD, NUS", status: "Current" },
-  { name: "Jingyuan Deng", description: "PhD, NUS", status: "Current" },
+];
+
+export const studentItems: StudentItem[] = [
+  {
+    name: "Yiming Liu",
+    description: "PhD, NUS",
+    startYear: 2021,
+  },
+  {
+    name: "Jingyuan Deng",
+    description: "PhD, NUS",
+    startYear: 2021,
+  },
   {
     name: "Dingyu Shi",
     description:
       "PhD Student\nResearch Interest: Digital Marketing, Econometrics",
-    status: "Current",
+    startYear: 2023,
   },
   {
     name: "Yingfei Shi",
     description:
       "PhD Student\nResearch Interest: Recommendation, Computational Social Science",
-    status: "Current",
+    startYear: 2023,
   },
   {
     name: "Mingxuan Zheng",
     description:
       "PhD Student\nResearch Interest: Explainable AI, Fintech, LLM",
-    status: "Current",
+    startYear: 2023,
   },
-  { name: "Duofeng Xu", description: "PhD, NUS", status: "Current" },
-  { name: "Wei Zhang", description: "PhD, NUS", status: "Current" },
+  {
+    name: "Duofeng Xu",
+    description: "PhD, NUS",
+    startYear: 2025,
+  },
+  {
+    name: "Wei Zhang",
+    description: "PhD, NUS",
+    startYear: 2025,
+  },
 ];

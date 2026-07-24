@@ -198,15 +198,15 @@ Teaching content is maintained under `siteContent.teaching.groups` in `src/data/
 ### 8.4 Students
 
 - Students renders as section `06` with the `students` ID and participates in hotbar navigation and active-section detection.
-- A prominent, page-centered `Students` title appears after the section kicker using the same typography as the Research section's `All Publications` heading.
-- Records are maintained in the top-level `studentItems` array in `src/data/siteContent.tsx`.
-- Each record has a `name`, `description`, and `status`; descriptions may contain line breaks and status must be either `Alumni` or `Current`.
-- The central array can be edited directly to add, remove, revise, or reclassify student records. Existing migrated records retain Alumni status.
-- Student cards render in an arbitrary-row, three-column grid on desktop.
-- The All, Alumni, and Current tabs appear beside the search bar and filter records by status. All is selected initially.
-- In the All tab only, each card displays a compact top-left `Alumni` or `Student` status tag. The Alumni and Current tabs omit these tags.
-- Inline search filters immediately and case-insensitively across names and descriptions within the active status tab. Multi-word queries use order-independent AND matching, so a name can be found in either given-name/surname or surname/given-name order.
-- With no matching records, the grid displays a query-specific or category-specific empty-state message.
+- The section contains two permanently visible subsections in order: **Alumni** and **Students**.
+- Alumni records are maintained in the top-level `alumniItems` array, while current student records are maintained in the separate top-level `studentItems` array in `src/data/siteContent.tsx`.
+- Each record has a `name`, `description`, numeric `startYear`, and optional numeric `endYear`; descriptions may contain line breaks. Array membership determines whether the record is an alumnus or current student.
+- Each subsection has its own page-centered heading, search input, responsive card grid, and empty state. There are no status tabs or status tags.
+- Both grids render in three columns on desktop.
+- Cards display `startYear–endYear` when an end year is present and display only `startYear` otherwise.
+- Alumni are sorted by `endYear` in descending order; records without an end year appear last. Current students are sorted by `startYear` in descending order. Records sharing the same relevant year are sorted alphabetically by name.
+- Each search independently filters its subsection immediately and case-insensitively across names and descriptions. Multi-word queries use order-independent AND matching, so a name can be found in either given-name/surname or surname/given-name order.
+- With no matching records, the corresponding grid displays a query-specific or subsection-specific empty-state message.
 - The section has a 70% viewport minimum height so the final navigation target can become active even when a filtered result set is empty.
 
 ## 9. Global site search
@@ -226,7 +226,7 @@ Teaching content is maintained under `siteContent.teaching.groups` in `src/data/
 The global search index is generated automatically by `SearchOverlay.tsx` from:
 
 - The About, Teaching, Services, Awards, and Students content objects in `siteContent`.
-- Every record in the top-level `studentItems` array.
+- Every record in the top-level `alumniItems` and `studentItems` arrays.
 - Every record in `journalPublications`, `conferencePublications`, `underReviewPublications`, and `workingPaperPublications`.
 
 There is no manually maintained `searchItems` array. React-formatted content is converted to plain searchable text while retaining its displayed formatting at the original section.
@@ -286,7 +286,7 @@ Matching behavior:
 | `max-width: 620px` | Main margins and navigation padding reduce; selected multi-column cards collapse |
 | `max-width: 380px` | About action buttons switch from two columns to one full-width control per row |
 
-The Students grid displays three columns above 900 px, two columns at 900 px and below, and one column at 620 px and below. Student search and tabs stack at 900 px and below; the tabs remain horizontally usable on mobile.
+Both Students-section grids display three columns above 900 px, two columns at 900 px and below, and one column at 620 px and below. Each search bar remains full-width above its corresponding grid.
 
 At 620 px and below, mobile-only rules preserve the desktop presentation while adapting the site as follows:
 
@@ -308,7 +308,7 @@ Implemented accessibility provisions include:
 - `aria-label` on page navigation and search controls.
 - Tab roles and `aria-selected` state for publication filtering.
 - A screen-reader-only label for publication search.
-- A screen-reader-only label for Students search, tab semantics with `aria-selected`, and a polite live region for student results.
+- A screen-reader-only label for each Alumni/Students search and a polite live region for each result grid.
 - `role="status"` on the publication no-results message.
 - Keyboard-focus styles on publication controls.
 - Native buttons and links for interactive elements.
@@ -347,7 +347,7 @@ Known accessibility gaps:
 | `src/components/TeachingSection.tsx` | Renders teaching interests and course history from central content |
 | `src/components/ServicesSection.tsx` | Renders university service, editorship, and referee activity from central content |
 | `src/components/AwardsSection.tsx` | Renders grants and academic or professional awards from central content |
-| `src/components/StudentsSection.tsx` | Status tabs, name/description search, empty states, and responsive rendering of central student records |
+| `src/components/StudentsSection.tsx` | Independent Alumni and Students searches, empty states, and responsive grids |
 | `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
 | `src/data/siteContent.tsx` | Central data source for the document title, navigation, non-Research section copy, external links, publication arrays, students, and shared UI labels |
 | `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
@@ -372,7 +372,7 @@ Known accessibility gaps:
 
 `StudentsSection.tsx` owns:
 
-- Active student-status filter and student search query. Editable student records remain in the central content module.
+- Independent Alumni and Students search queries. Editable records remain in the central content module.
 
 All state is transient and resets on a full page refresh.
 
@@ -386,8 +386,8 @@ The central module contains:
 - `siteContent.navigation` for ordered section labels and IDs.
 - `siteContent.about` for the name, portrait metadata, position, education, research interests, action labels, contact details, and external URLs.
 - `siteContent.teaching.groups`, `siteContent.services.groups`, and `siteContent.awards.groups` for their headings and list content.
-- `siteContent.students` for section labels, filter labels, and student-card labels.
-- `studentItems` for the complete student record collection, separate from the `siteContent` object in the same style as the publication arrays.
+- `siteContent.students` for section and subsection labels, search copy, and empty-state messages.
+- `alumniItems` and `studentItems` for the separate Alumni and current-student record collections.
 - `journalPublications`, `conferencePublications`, `underReviewPublications`, and `workingPaperPublications` for publication records.
 - `siteContent.search` for global-search interface copy; searchable entries are derived automatically from the other content.
 
@@ -398,7 +398,7 @@ The file uses a `.tsx` extension because some About details and publication cita
 - Edit general site text, records, links, section labels, and the browser title in `src/data/siteContent.tsx`.
 - Edit Research section interface copy, filter labels, headings, result limits, and interaction behavior in `src/components/ResearchSection.tsx`.
 - Keep every navigation `id` within the `SectionId` union and synchronized with its rendered section ID.
-- Student `status` must be exactly `Current` or `Alumni`; descriptions may contain `\n` line breaks.
+- Student and alumni descriptions may contain `\n` line breaks. Every record requires `startYear`; `endYear` may be omitted. Move a record between `alumniItems` and `studentItems` to change its subsection.
 - Publication `year` remains a string, `text` contains the formatted citation, and `href` is optional.
 - Add a publication to exactly one source array. The All view is generated automatically.
 - New section groups, students, and publications become searchable automatically; no separate search-index maintenance is required.
@@ -464,7 +464,7 @@ A release satisfies the current specification when:
 6. At most 10 publications appear before expansion, `Show More Publications` reveals all matching entries, and `Hide Extra Publications` restores the limited view.
 7. Linked publication cards open the correct external URL in a new tab.
 8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
-9. Student entries render from the central editable array in a three-column desktop grid; All, Alumni, and Current tabs filter by status; and search matches both names and descriptions.
+9. Alumni and current students render from separate central arrays in two independent three-column desktop grids; Alumni sort by descending end year, Students sort by descending start year, same-year records sort alphabetically, and each subsection search matches names, descriptions, and years.
 10. The layout remains usable at desktop, tablet, and 320 px mobile widths.
 11. `npm run build` and `npm run lint` complete successfully.
 12. The production build works from the configured GitHub Pages base path.

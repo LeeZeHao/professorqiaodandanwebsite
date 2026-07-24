@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import {
+  alumniItems,
   conferencePublications,
   journalPublications,
   siteContent,
@@ -198,18 +199,25 @@ function createSearchEntries(): SearchEntry[] {
       siteContent.awards.sectionTitle,
       siteContent.awards.groups,
     ),
+    ...alumniItems.map((alumnus, index) => ({
+      id: `alumnus-${index}`,
+      sectionId: "students" as const,
+      group: siteContent.students.subsections.alumni.heading,
+      title: alumnus.name,
+      subtitle: alumnus.description.replaceAll("\n", " · "),
+      searchText: getSearchableText(alumnus),
+      color: sectionColors.students,
+      badge: siteContent.students.subsections.alumni.heading,
+    })),
     ...studentItems.map((student, index) => ({
       id: `student-${index}`,
       sectionId: "students" as const,
-      group: siteContent.students.sectionTitle,
+      group: siteContent.students.subsections.students.heading,
       title: student.name,
       subtitle: student.description.replaceAll("\n", " · "),
       searchText: getSearchableText(student),
       color: sectionColors.students,
-      badge:
-        student.status === "Current"
-          ? siteContent.students.currentTag
-          : siteContent.students.alumniTag,
+      badge: siteContent.students.subsections.students.heading,
     })),
     ...createPublicationEntries(
       "Journal Publications",
