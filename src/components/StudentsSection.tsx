@@ -70,6 +70,15 @@ function StudentSubsection({
             className="student-card"
             key={`${student.name}-${student.description}`}
           >
+            <img
+              className="student-picture"
+              src={student.picture ?? "default-profile.svg"}
+              alt={
+                student.picture
+                  ? (student.pictureAlt ?? student.name)
+                  : ""
+              }
+            />
             <h2>{student.name}</h2>
             <span className="student-years">
               {student.startYear}

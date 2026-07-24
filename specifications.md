@@ -200,10 +200,11 @@ Teaching content is maintained under `siteContent.teaching.groups` in `src/data/
 - Students renders as section `06` with the `students` ID and participates in hotbar navigation and active-section detection.
 - The section contains two permanently visible subsections in order: **Alumni** and **Students**.
 - Alumni records are maintained in the top-level `alumniItems` array, while current student records are maintained in the separate top-level `studentItems` array in `src/data/siteContent.tsx`.
-- Each record has a `name`, `description`, numeric `startYear`, and optional numeric `endYear`; descriptions may contain line breaks. Array membership determines whether the record is an alumnus or current student.
+- Each record has a `name`, `description`, numeric `startYear`, optional numeric `endYear`, optional `picture`, and optional `pictureAlt`; descriptions may contain line breaks. Array membership determines whether the record is an alumnus or current student.
 - Each subsection has its own page-centered heading, search input, responsive card grid, and empty state. There are no status tabs or status tags.
 - Both grids render in three columns on desktop.
 - Cards display `startYear–endYear` when an end year is present and display only `startYear` otherwise.
+- Each card displays a centered circular picture above the name. Records without a `picture` use `public/default-profile.svg`, a neutral grey profile placeholder.
 - Alumni are sorted by `endYear` in descending order; records without an end year appear last. Current students are sorted by `startYear` in descending order. Records sharing the same relevant year are sorted alphabetically by name.
 - Each search independently filters its subsection immediately and case-insensitively across names and descriptions. Multi-word queries use order-independent AND matching, so a name can be found in either given-name/surname or surname/given-name order.
 - With no matching records, the corresponding grid displays a query-specific or subsection-specific empty-state message.
@@ -398,7 +399,7 @@ The file uses a `.tsx` extension because some About details and publication cita
 - Edit general site text, records, links, section labels, and the browser title in `src/data/siteContent.tsx`.
 - Edit Research section interface copy, filter labels, headings, result limits, and interaction behavior in `src/components/ResearchSection.tsx`.
 - Keep every navigation `id` within the `SectionId` union and synchronized with its rendered section ID.
-- Student and alumni descriptions may contain `\n` line breaks. Every record requires `startYear`; `endYear` may be omitted. Move a record between `alumniItems` and `studentItems` to change its subsection.
+- Student and alumni descriptions may contain `\n` line breaks. Every record requires `startYear`; `endYear`, `picture`, and `pictureAlt` may be omitted. Move a record between `alumniItems` and `studentItems` to change its subsection.
 - Publication `year` remains a string, `text` contains the formatted citation, and `href` is optional.
 - Add a publication to exactly one source array. The All view is generated automatically.
 - New section groups, students, and publications become searchable automatically; no separate search-index maintenance is required.

@@ -701,16 +701,19 @@ export type StudentItem = {
   description: string;
   startYear: number;
   endYear?: number;
+  picture?: string;
+  pictureAlt?: string;
 };
 
 export const alumniItems: StudentItem[] = [
-  // TODO: Replace these placeholder years with verified dates.
   {
     name: "Ying Lu",
     description:
       "Former: PhD\nCurrent: Assistant Professor, IE University, Spain",
     startYear: 2019,
     endYear: 2025,
+    picture: "alumni/ying-lu.webp",
+    pictureAlt: "Ying Lu",
   },
   {
     name: "Haoyu Yuan",
@@ -718,6 +721,8 @@ export const alumniItems: StudentItem[] = [
       "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
     startYear: 2023,
     endYear: 2024,
+    picture: "alumni/haoyu-yuan.png",
+    pictureAlt: "Haoyu Yuan",
   },
   {
     name: "Dinghao Xi",
@@ -725,12 +730,16 @@ export const alumniItems: StudentItem[] = [
       "Former: Visiting Student\nCurrent: Assistant Professor, Shanghai University of Finance and Economics",
     startYear: 2022,
     endYear: 2023,
+    picture: "alumni/dinghao-xi.jpg",
+    pictureAlt: "Dinghao Xi",
   },
   {
     name: "Qian Xiong",
     description: "Former: Visiting Student",
     startYear: 2022,
     endYear: 2023,
+    picture: "alumni/qian-xiong.jpg",
+    pictureAlt: "Qian Xiong",
   },
 ];
 
@@ -739,38 +748,52 @@ export const studentItems: StudentItem[] = [
     name: "Yiming Liu",
     description: "PhD, NUS",
     startYear: 2021,
+    picture: "students/yiming-liu.jpg",
+    pictureAlt: "Yiming Liu",
   },
   {
     name: "Jingyuan Deng",
     description: "PhD, NUS",
     startYear: 2021,
+    picture: "students/jingyuan-deng.avif",
+    pictureAlt: "Jingyuan Deng",
   },
   {
     name: "Dingyu Shi",
     description:
       "PhD Student\nResearch Interest: Digital Marketing, Econometrics",
     startYear: 2023,
+    picture: "students/dingyu-shi.jpg",
+    pictureAlt: "Dingyu Shi",
   },
   {
     name: "Yingfei Shi",
     description:
       "PhD Student\nResearch Interest: Recommendation, Computational Social Science",
     startYear: 2023,
+    picture: "students/yingfei-shi.jpg",
+    pictureAlt: "Yingfei Shi",
   },
   {
     name: "Mingxuan Zheng",
     description:
       "PhD Student\nResearch Interest: Explainable AI, Fintech, LLM",
     startYear: 2023,
+    picture: "students/mingxuan-zheng.jpg",
+    pictureAlt: "Mingxuan Zheng",
   },
   {
     name: "Duofeng Xu",
     description: "PhD, NUS",
     startYear: 2025,
+    picture: "students/duofeng-xu.jpg",
+    pictureAlt: "Duofeng Xu",
   },
   {
     name: "Wei Zhang",
     description: "PhD, NUS",
     startYear: 2025,
+    picture: "students/wei-zhang.jpg",
+    pictureAlt: "Wei Zhang",
   },
 ];
