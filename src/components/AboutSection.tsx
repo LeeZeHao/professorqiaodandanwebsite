@@ -1,6 +1,6 @@
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import { forwardRef } from "react";
-import type { SectionId } from "../data/siteData";
+import { siteContent, type SectionId } from "../data/siteContent";
 
 type AboutSectionProps = {
   onNavigate: (id: SectionId) => void;
@@ -8,64 +8,36 @@ type AboutSectionProps = {
 
 export const AboutSection = forwardRef<HTMLElement, AboutSectionProps>(
   function AboutSection({ onNavigate }, ref) {
+    const content = siteContent.about;
+
     return (
       <section id="about" ref={ref} className="about-hero">
         <div className="portrait-wrap">
           <img
-            src="profile.jpg"
-            alt="Qiao Dandan"
+            src={content.portrait.src}
+            alt={content.portrait.alt}
             className="portrait-image"
           />
         </div>
 
         <div className="status-pill">
           <span className="status-dot" />
-          Associate Professor, Information Systems & Analytics @ National University of Singapore
+          {content.status}
         </div>
 
-        <h1 className="about-title">Dandan Qiao</h1>
+        <h1 className="about-title">{content.name}</h1>
 
         <div className="about-content">
-          <div className="about-block">
-            <h2>Position</h2>
-            <ul>
-              <li>
-                Associate Professor, Information Systems & Analytics, National University
-                of Singapore, 2024.07–Present
-              </li>
-              <li>
-                Assistant Professor, Information Systems & Analytics, National University
-                of Singapore, 2018.07–2024.06
-              </li>
-            </ul>
-          </div>
-
-          <div className="about-block">
-            <h2>Education</h2>
-            <ul>
-              <li>Ph.D., Information Systems, Tsinghua University, 2018</li>
-              <li>
-                Visiting Student, Information Systems, The University of Texas at Austin,
-                2015.08–2017.09
-              </li>
-              <li>
-                B.S., Information Systems, Beijing University of Posts and
-                Telecommunications, 2012
-              </li>
-            </ul>
-          </div>
-
-          <div className="about-block">
-            <h2>Research Interests</h2>
-            <ul>
-              <li>
-                <b>Topics:</b> Digital Platform Design, AI and Business Application, Computatioinal Social Science
-              </li>
-              <li>
-                <b>Methodologies:</b> Computational Methods, Econometric Analysis, Field Experiments
-              </li>
-            </ul>
-          </div>
+          {content.groups.map((group) => (
+            <div className="about-block" key={group.title}>
+              <h2>{group.title}</h2>
+              <ul>
+                {group.details.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="about-actions">
@@ -74,48 +46,48 @@ export const AboutSection = forwardRef<HTMLElement, AboutSectionProps>(
             onClick={() => onNavigate("research")}
           >
             <ArrowUpRight size={17} />
-            Research
+            {content.actions.research}
           </button>
 
           <a
             className="secondary-about-action"
-            href="https://www.google.com/maps/place/COM+2/@1.2942824,103.7741012,15z/data=!4m6!3m5!1s0x31da1af8b4dca745:0x138ac77cdd89a8f1!8m2!3d1.2942824!4d103.7741012!16s%2Fg%2F11c6lw2s04?entry=ttu"
+            href={content.actions.location.href}
             target="_blank"
             rel="noreferrer"
           >
             <MapPin size={17} />
-            COM2-04-15
+            {content.actions.location.label}
           </a>
 
           <a
             className="secondary-about-action"
-            href="https://www.comp.nus.edu.sg/disa/people/qiaodd/"
+            href={content.actions.schoolPage.href}
             target="_blank"
             rel="noreferrer"
           >
             <ArrowUpRight size={17} />
-            School Page
+            {content.actions.schoolPage.label}
           </a>
 
           <a
             className="secondary-about-action"
-            href="mailto:qiaodd@nus.edu.sg"
+            href={content.actions.email.href}
           >
             <Mail size={17} />
-            qiaodd@nus.edu.sg
+            {content.actions.email.label}
           </a>
 
           <a
             className="secondary-about-action"
-            href="https://scholar.google.com/citations?user=2ESyqbEAAAAJ&hl=en"
+            href={content.actions.scholar.href}
             target="_blank"
             rel="noreferrer"
           >
             <ArrowUpRight size={17} />
-            Google Scholar
+            {content.actions.scholar.label}
           </a>
         </div>
       </section>
     );
-  }
+  },
 );

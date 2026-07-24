@@ -1,6 +1,10 @@
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
-import { searchItems, type SectionId } from "../data/siteData";
+import {
+  searchItems,
+  siteContent,
+  type SectionId,
+} from "../data/siteContent";
 
 type SearchOverlayProps = {
   open: boolean;
@@ -12,7 +16,11 @@ function normalize(value: string) {
   return value.toLowerCase().trim();
 }
 
-export function SearchOverlay({ open, onClose, onSelect }: SearchOverlayProps) {
+export function SearchOverlay({
+  open,
+  onClose,
+  onSelect,
+}: SearchOverlayProps) {
   const [query, setQuery] = useState("");
 
   const results = useMemo(() => {
@@ -22,7 +30,7 @@ export function SearchOverlay({ open, onClose, onSelect }: SearchOverlayProps) {
 
     return searchItems.filter((item) => {
       const haystack = normalize(
-        [item.title, item.subtitle, item.group, ...item.keywords].join(" ")
+        [item.title, item.subtitle, item.group, ...item.keywords].join(" "),
       );
 
       return q
@@ -44,16 +52,19 @@ export function SearchOverlay({ open, onClose, onSelect }: SearchOverlayProps) {
 
   return (
     <div className="search-backdrop" onMouseDown={onClose}>
-      <div className="search-panel" onMouseDown={(event) => event.stopPropagation()}>
+      <div
+        className="search-panel"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
         <div className="search-input-row">
           <Search size={18} />
           <input
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search..."
+            placeholder={siteContent.search.placeholder}
           />
-          <button onClick={onClose}>ESC</button>
+          <button onClick={onClose}>{siteContent.search.closeLabel}</button>
         </div>
 
         <div className="search-results-list">
@@ -78,7 +89,7 @@ export function SearchOverlay({ open, onClose, onSelect }: SearchOverlayProps) {
                     </span>
                     <small>{item.subtitle}</small>
                   </span>
-                  <kbd>↵</kbd>
+                  <kbd>{siteContent.search.resultKey}</kbd>
                 </button>
               ))}
             </div>
@@ -86,7 +97,7 @@ export function SearchOverlay({ open, onClose, onSelect }: SearchOverlayProps) {
 
           {results.length === 0 && (
             <div className="empty-search">
-              No matches found. Try “projects”, “AI”, “teaching”, or “contact”.
+              {siteContent.search.emptyMessage}
             </div>
           )}
         </div>

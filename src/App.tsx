@@ -7,7 +7,7 @@ import { TeachingSection } from "./components/TeachingSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { AwardsSection } from "./components/AwardsSection";
 import { StudentsSection } from "./components/StudentsSection";
-import { navItems, type SectionId } from "./data/siteData";
+import { navItems, siteContent, type SectionId } from "./data/siteContent";
 import "./styles/global.css";
 
 export default function App() {
@@ -63,6 +63,8 @@ export default function App() {
   }
 
   useEffect(() => {
+    document.title = siteContent.siteTitle;
+
     function updateActiveSection() {
       const triggerY = window.innerHeight * 0.35;
       const pageBottom = window.scrollY + window.innerHeight;

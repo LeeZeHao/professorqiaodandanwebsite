@@ -121,7 +121,7 @@ Each publication record contains:
 - `text`: formatted React content containing authors, title, venue, and citation details.
 - `href`: optional external URL.
 
-Publications are maintained directly in `src/components/ResearchSection.tsx` rather than in the shared site data file or an external content source.
+All four publication arrays use the shared `TimelinePublication` type and are maintained in the central content module, `src/data/siteContent.tsx`. Formatted React fragments are allowed in a publication's `text` field so author emphasis and italicized venues remain editable with the citation.
 
 ### 7.2 Category tabs
 
@@ -183,7 +183,7 @@ The Teaching section contains two content groups.
 - Mining Business Insights from Web Data (`BT4222`), undergraduate level, National University of Singapore.
 - Analytics Driven Design of Adaptive Systems (`BT4014`), undergraduate level, National University of Singapore.
 
-Teaching content is maintained as a local array in `src/components/TeachingSection.tsx`.
+Teaching content is maintained under `siteContent.teaching.groups` in `src/data/siteContent.tsx`.
 
 ### 8.3 Services and Awards
 
@@ -199,9 +199,9 @@ Teaching content is maintained as a local array in `src/components/TeachingSecti
 
 - Students renders as section `06` with the `students` ID and participates in hotbar navigation and active-section detection.
 - A prominent, page-centered `Students` title appears after the section kicker using the same typography as the Research section's `All Publications` heading.
-- Records are maintained in the `studentItems` array near the top of `src/components/StudentsSection.tsx`.
+- Records are maintained in the top-level `studentItems` array in `src/data/siteContent.tsx`.
 - Each record has a `name`, `description`, and `status`; descriptions may contain line breaks and status must be either `Alumni` or `Current`.
-- The array can be edited directly to add, remove, revise, or reclassify student records. Existing migrated records retain Alumni status.
+- The central array can be edited directly to add, remove, revise, or reclassify student records. Existing migrated records retain Alumni status.
 - Student cards render in an arbitrary-row, three-column grid on desktop.
 - The All, Alumni, and Current tabs appear beside the search bar and filter records by status. All is selected initially.
 - In the All tab only, each card displays a compact top-left `Alumni` or `Student` status tag. The Alumni and Current tabs omit these tags.
@@ -223,7 +223,7 @@ Teaching content is maintained as a local array in `src/components/TeachingSecti
 
 ### 9.2 Matching
 
-Searchable entries are defined in `src/data/siteData.ts` and include:
+Searchable entries are defined alongside the rest of the content in `src/data/siteContent.tsx` and include:
 
 - A unique ID.
 - Destination section ID.
@@ -341,14 +341,14 @@ Known accessibility gaps:
 | `src/App.tsx` | Composes the page, owns navigation/search state, tracks active sections, and performs animated scrolling |
 | `src/components/Hotbar.tsx` | Sticky navigation and global-search trigger |
 | `src/components/SearchOverlay.tsx` | Global indexed site search |
-| `src/components/AboutSection.tsx` | Academic profile and external/contact actions |
-| `src/components/ResearchSection.tsx` | Publication data, category filtering, inline search, limiting, expansion, and timeline rendering |
-| `src/components/TeachingSection.tsx` | Teaching interests and course history |
-| `src/components/ServicesSection.tsx` | University service, editorship, and referee activity |
-| `src/components/AwardsSection.tsx` | Grants and academic or professional awards |
-| `src/components/StudentsSection.tsx` | Editable current/alumni data, status tabs, name/description search, empty states, and responsive student-card grid |
+| `src/components/AboutSection.tsx` | Renders the academic profile and external/contact actions from central content |
+| `src/components/ResearchSection.tsx` | Research section presentation, category configuration, filtering, inline search, limiting, expansion, and timeline rendering |
+| `src/components/TeachingSection.tsx` | Renders teaching interests and course history from central content |
+| `src/components/ServicesSection.tsx` | Renders university service, editorship, and referee activity from central content |
+| `src/components/AwardsSection.tsx` | Renders grants and academic or professional awards from central content |
+| `src/components/StudentsSection.tsx` | Status tabs, name/description search, empty states, and responsive rendering of central student records |
 | `src/components/SectionShell.tsx` | Generic section wrapper; currently not used by `App.tsx` |
-| `src/data/siteData.ts` | Navigation IDs and global-search index |
+| `src/data/siteContent.tsx` | Central data source for the document title, navigation, non-Research section copy, external links, publication arrays, students, shared UI labels, and global-search entries |
 | `src/styles/global.css` | Active application layout, component, interaction, and responsive styling |
 
 ### 12.3 State ownership
@@ -371,18 +371,37 @@ Known accessibility gaps:
 
 `StudentsSection.tsx` owns:
 
-- Active student-status filter and student search query; editable student records are module-level content data.
+- Active student-status filter and student search query. Editable student records remain in the central content module.
 
 All state is transient and resets on a full page refresh.
 
-### 12.4 Content storage
+### 12.4 Central content storage
 
-- Navigation and global-search metadata are stored in `src/data/siteData.ts`.
-- About content and external URLs are embedded in `AboutSection.tsx`.
-- Publication citations and URLs are embedded in `ResearchSection.tsx`.
-- Teaching content is embedded in `TeachingSection.tsx`.
-- Student names, descriptions, and Alumni/Current statuses are stored in the local `studentItems` array in `StudentsSection.tsx`.
-- No content schema validation or remote content loading is present.
+`src/data/siteContent.tsx` is the central source for academic content and records. The Research section keeps its presentation, interaction logic, filter labels, headings, and other interface copy in `src/components/ResearchSection.tsx`; only its publication datasets live in the central content module.
+
+The central module contains:
+
+- `siteContent.siteTitle` and `siteContent.brandLabel` for the browser title and hotbar brand.
+- `siteContent.navigation` for ordered section labels and IDs.
+- `siteContent.about` for the name, portrait metadata, position, education, research interests, action labels, contact details, and external URLs.
+- `siteContent.teaching.groups`, `siteContent.services.groups`, and `siteContent.awards.groups` for their headings and list content.
+- `siteContent.students` for section labels, filter labels, and student-card labels.
+- `studentItems` for the complete student record collection, separate from the `siteContent` object in the same style as the publication arrays.
+- `journalPublications`, `conferencePublications`, `underReviewPublications`, and `workingPaperPublications` for publication records.
+- `searchItems` and `siteContent.search` for global-search entries and interface copy.
+
+The file uses a `.tsx` extension because some About details and publication citations contain React fragments for bold and italic formatting. Content remains statically bundled; there is no CMS, database, runtime content fetch, or schema-validation service.
+
+### 12.5 Content editing rules
+
+- Edit general site text, records, links, section labels, and the browser title in `src/data/siteContent.tsx`.
+- Edit Research section interface copy, filter labels, headings, result limits, and interaction behavior in `src/components/ResearchSection.tsx`.
+- Keep every navigation `id` within the `SectionId` union and synchronized with its rendered section ID.
+- Student `status` must be exactly `Current` or `Alumni`; descriptions may contain `\n` line breaks.
+- Publication `year` remains a string, `text` contains the formatted citation, and `href` is optional.
+- Add a publication to exactly one source array. The All view is generated automatically.
+- When a major content area changes, update its corresponding `searchItems` keywords or subtitle in the same central file.
+- Components in `src/components` are presentation and interaction code. `ResearchSection.tsx` also owns Research-specific interface labels, but publication records must remain in `siteContent.tsx`.
 
 ## 13. Assets and external destinations
 
@@ -444,16 +463,15 @@ A release satisfies the current specification when:
 6. At most 10 publications appear before expansion, `Show More Publications` reveals all matching entries, and `Hide Extra Publications` restores the limited view.
 7. Linked publication cards open the correct external URL in a new tab.
 8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
-9. Student entries render from the editable array in a three-column desktop grid; All, Alumni, and Current tabs filter by status; and search matches both names and descriptions.
+9. Student entries render from the central editable array in a three-column desktop grid; All, Alumni, and Current tabs filter by status; and search matches both names and descriptions.
 10. The layout remains usable at desktop, tablet, and 320 px mobile widths.
 11. `npm run build` and `npm run lint` complete successfully.
 12. The production build works from the configured GitHub Pages base path.
 
 ## 16. Known gaps and maintenance notes
 
-- The Services and Awards content arrays are still named `teachingItems` internally; renaming them would improve code clarity without changing behavior.
-- The HTML document title is currently `professorqiaodandanwebsite`; no description, social-sharing metadata, canonical URL, or structured data is configured.
-- The global search index must be updated manually when site content changes.
+- The document title is set from `siteContent.siteTitle`; no description, social-sharing metadata, canonical URL, or structured data is configured.
+- The global search index remains manually curated, but it now lives beside all other editable content in `siteContent.tsx`.
 - Publication search derives text from rendered citation nodes; a structured publication model with explicit `authors`, `title`, `venue`, `type`, and `year` fields would make future filtering and maintenance more reliable.
 - `src/index.css` and `src/App.css` retain Vite starter styles. `src/index.css` is imported before the active global stylesheet, while `src/App.css` is not imported. Consolidation would reduce conflicting or obsolete styles.
 - `SectionShell.tsx` and several generic global style groups are currently unused.

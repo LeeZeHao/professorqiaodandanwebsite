@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import { navItems, type SectionId } from "../data/siteData";
+import { navItems, siteContent, type SectionId } from "../data/siteContent";
 
 type HotbarProps = {
   activeSection: SectionId;
@@ -24,9 +24,9 @@ export function Hotbar({ activeSection, onNavigate, onSearchOpen }: HotbarProps)
         <span className="section-line" />
       </div>
 
-      <nav className="hotbar-nav" aria-label="Page sections">
+      <nav className="hotbar-nav" aria-label={siteContent.hotbar.navigationLabel}>
         <button className="brand-button" onClick={() => onNavigate("about")}>
-          Qiao Dandan
+          {siteContent.brandLabel}
         </button>
 
         {navItems.map((item) => (
@@ -42,10 +42,10 @@ export function Hotbar({ activeSection, onNavigate, onSearchOpen }: HotbarProps)
         <button
           className="search-shortcut"
           onClick={onSearchOpen}
-          aria-label="Open search"
+          aria-label={siteContent.hotbar.openSearchLabel}
         >
           <Search size={14} />
-          <span>⌘K</span>
+          <span>{siteContent.hotbar.searchShortcut}</span>
         </button>
       </nav>
     </header>
