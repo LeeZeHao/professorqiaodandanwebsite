@@ -2,6 +2,13 @@
 # Professor Qiao Dandan Website
 Portfolio Website for Professor Qiao DanDan.
 
+# Developer Guide
+1. Clone the repository.
+2. Ensure latest Node.js is installed.
+3. Run ```npm install``` to install packages.
+4. ```npm run dev``` for local preview.
+5. ```npm run deploy``` to push to GitHub Pages.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
