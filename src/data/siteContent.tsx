@@ -352,6 +352,14 @@ export const journalPublications: TimelinePublication[] = [
 
 export const conferencePublications: TimelinePublication[] = [
   {
+    year: "2026",
+    text: (
+      <>
+        Gang Li, <b>Dandan Qiao</b>, and Mingxuan Zheng. (2026). Structured event representation and stock return predictability. Conference presentation, <i>China International Conference in Finance</i> (CICF) 2026.
+      </>
+    ),
+  },
+  {
     year: "2025",
     text: (
       <>
@@ -379,7 +387,7 @@ export const conferencePublications: TimelinePublication[] = [
     year: "2025",
     text: (
       <>
-        Jingyuan Deng, Aditya Karanam and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>The 85th Annual Meeting of the Academy of Management</i> (AOM), Copenhagen, Denmark, 2025
+        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>The 85th Annual Meeting of the Academy of Management</i> (AOM), Copenhagen, Denmark, 2025
       </>
     ),
   },
@@ -395,7 +403,7 @@ export const conferencePublications: TimelinePublication[] = [
     year: "2025",
     text: (
       <>
-        Jingyuan Deng, Aditya Karanam and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
+        Jingyuan Deng and <b>Dandan Qiao</b>, “Better Connection, More Innovation? Unveiling the Impact of Ride-Hailing Services on Local Knowledge Flows”, <i>Symposium on Statistical Challenges in Electronic Commerce Research</i> (SCECR), Paphos, Cyprus, 2025
       </>
     ),
   },
@@ -419,7 +427,7 @@ export const conferencePublications: TimelinePublication[] = [
     year: "2024",
     text: (
       <>
-        <b>Dandan Qiao</b>, Huaxia Rui, Qian Xiong, “AI and Freelancers: Has the Inflection Point Arrived?” <i>International Conference on Information Systems</i> (ICIS), Bankok, Thailand, 2024.
+        <b>Dandan Qiao</b>, Huaxia Rui, Qian Xiong, “AI and Freelancers: Has the Inflection Point Arrived?” <i>International Conference on Information Systems</i> (ICIS), Bangkok, Thailand, 2024.
       </>
     ),
   },
@@ -646,7 +654,39 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
+        Dinghao Xi, Ying Lu, <b>Dandan Qiao</b> and Wei Xu, “Unveiling the Secrets of Collaboration in Online Video Sharing Platforms” Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
         Jiaxu Peng, Jungpil Hahn, <b>Dandan Qiao</b>. “Predictive Analytics in Changing Environments: Trade-Offs in Response to Changes in Data Patterns”, Rejected & Resubmitted at <i>Information Systems Research</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Bin Li, Nakyung Kyung, <b>Dandan Qiao</b> and Luning Liu, “AI for VIP Customers: Examining Impact of AI Services on Customer Interactions” Under Review at <i>Production and Operations Management</i>.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Duofeng Xu, Bryan Hooi, <b>Dandan Qiao</b>, “When Order Matters: First-Speaker Bias and Mitigation through Personality in Sequential Multi-Agent Debate”, Under Review at EMNLP (Empirical Methods in Natural Language Processing) 2026.
+      </>
+    ),
+  },
+  {
+    year: "",
+    text: (
+      <>
+        Yingfei Shi, <b>Dandan Qiao</b>, Shukai Liu, “Your Like Is Not My Like: Propensity Aware Multi-Behavior Recommendation’, Under Review at AAAI 2027.
       </>
     ),
   },
@@ -657,7 +697,7 @@ export const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “Unveiling the Secrets of Collaboration in Online Video Sharing Platforms” with Dinghao Xi, Ying Lu, and Wei Xu, Working Paper.
+        “Structured Event Representation and Stock Return Predictability” with Bing Han, Gang Li, and Mingxuan Zheng, Working paper.
       </>
     ),
   },
@@ -665,15 +705,7 @@ export const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “AI for VIP Customers: Examining Impact of AI Services on Customer Interactions” with Bin Li, Nakyung Kyung, and Luning Liu. Working Paper.
-      </>
-    ),
-  },
-  {
-    year: "",
-    text: (
-      <>
-        “Modelling Collusion Dynamics in Decentralized Online Social Media” with Ying Lu, Shu He,and Bernard C Y Tan. Working Paper.
+        “Modelling Collusion Dynamics in Decentralized Online Social Media” with Ying Lu, Shu He, and Bernard C Y Tan. Working Paper.
       </>
     ),
   },
@@ -684,15 +716,6 @@ export const workingPaperPublications: TimelinePublication[] = [
         “In Coherence We Trust: Designing an Innovative Review Ranking System” with Yiming Liu, Xiaofan Li, Working Paper.
       </>
     ),
-  },
-  {
-    year: "",
-    text: (
-      <>
-        "Structured Event Representation and Stock Return Predictability" with Bing Han, Gang Li, and Mingxuan Zheng, Working paper. 
-      </>
-    ),
-    href: "https://arxiv.org/abs/2512.19484"
   },
 ];
 
