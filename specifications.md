@@ -206,7 +206,7 @@ Teaching content is maintained under `siteContent.teaching.groups` in `src/data/
 - Cards display `startYear–endYear` when an end year is present and display only `startYear` otherwise.
 - Each card displays a centered circular picture above the name. Records without a `picture` use `public/default-profile.svg`, a neutral grey profile placeholder.
 - When `profileUrl` is present, the entire card is a link that opens the profile in a new tab with `rel="noreferrer"`. Linked cards retain the same typography as non-linked cards and use a slightly extended horizontal hover/focus highlight. Cards without a profile URL remain non-interactive articles.
-- Alumni are sorted by `endYear` in descending order; records without an end year appear last. Current students are sorted by `startYear` in descending order. Records sharing the same relevant year are sorted alphabetically by name.
+- Alumni are sorted by `endYear` in descending order; records without an end year appear last, and Alumni sharing an end year are sorted alphabetically by name. Current students are sorted by `startYear` in ascending order; Students sharing a start year retain their source order from `studentItems`.
 - Each search independently filters its subsection immediately and case-insensitively across names and descriptions. Multi-word queries use order-independent AND matching, so a name can be found in either given-name/surname or surname/given-name order.
 - With no matching records, the corresponding grid displays a query-specific or subsection-specific empty-state message.
 - The section has a 70% viewport minimum height so the final navigation target can become active even when a filtered result set is empty.
@@ -466,7 +466,7 @@ A release satisfies the current specification when:
 6. At most 10 publications appear before expansion, `Show More Publications` reveals all matching entries, and `Hide Extra Publications` restores the limited view.
 7. Linked publication cards open the correct external URL in a new tab.
 8. Global search filters configured search entries using case-insensitive AND matching and navigates to the selected section.
-9. Alumni and current students render from separate central arrays in two independent three-column desktop grids; Alumni sort by descending end year, Students sort by descending start year, same-year records sort alphabetically, and each subsection search matches names, descriptions, and years.
+9. Alumni and current students render from separate central arrays in two independent three-column desktop grids; Alumni sort by descending end year with alphabetical ties, Students sort by ascending start year with same-year source order preserved, and each subsection search matches names, descriptions, and years.
 10. The layout remains usable at desktop, tablet, and 320 px mobile widths.
 11. `npm run build` and `npm run lint` complete successfully.
 12. The production build works from the configured GitHub Pages base path.

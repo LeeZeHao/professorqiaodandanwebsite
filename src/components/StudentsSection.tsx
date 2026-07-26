@@ -39,10 +39,13 @@ function StudentSubsection({
         return queryTerms.every((term) => searchableText.includes(term));
       })
       .sort((a, b) => {
-        const yearDifference =
-          (b[sortBy] ?? Number.NEGATIVE_INFINITY) -
-          (a[sortBy] ?? Number.NEGATIVE_INFINITY);
+        if (sortBy === "startYear") {
+          return a.startYear - b.startYear;
+        }
 
+        const yearDifference =
+          (b.endYear ?? Number.NEGATIVE_INFINITY) -
+          (a.endYear ?? Number.NEGATIVE_INFINITY);
         return yearDifference || a.name.localeCompare(b.name);
       });
   }, [items, normalizedQuery, sortBy]);
