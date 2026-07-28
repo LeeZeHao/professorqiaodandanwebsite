@@ -2,12 +2,36 @@
 # Professor Qiao Dandan Website
 Portfolio Website for Professor Qiao DanDan.
 
-# Developer Guide
+# Developer Setup
 1. Clone the repository.
 2. Ensure latest Node.js is installed.
 3. Run ```npm install``` to install packages.
 4. ```npm run dev``` for local preview.
 5. ```npm run deploy``` to push to GitHub Pages.
+
+# How to Update Site Content
+Site content is defined in ```data/siteContent.tsx```.
+  
+## Publications
+There are 4 types of publications: journalPublications, conferencePublications, underReviewPublications, workingPaperPublications.   
+The arrays for these publication objects can be found in ```data/siteContent.tsx```.
+Each item has fields: 
+* **year** (required): Year in numerical form. Can be an empty string. Publications will be sorted in descending order based on year.
+* **text** (required): Should be wrapped in html formatting like this ```(<>text</>)```. Tags ```<b></b>``` or ```<i></i>``` can be used to format the text.
+* **href** (optional): Used to add a website link. If added, the publication card on the website will be clickable and lead to the website.
+  
+## Students
+There are 2 types of students: alumniItems, studentItems
+The arrays for these student objects can be found in ```data/siteContent.tsx```.
+Each item has fields:
+* **name** (required): Name of the student / alumni.
+* **description** (required): Description of the student / alumni. 
+* **startYear** (required): Start of candidature. Students are arranged according to startYear in ascending order.
+* **endYear** (optional): End of candidature (not added for non-alumni). Alumni are arranged according to endYear in descending order.
+* **picture** (optional): Picture files should be added to ```public/alumni``` and ```public/students``` folders. This field should have the path (e.g. ```alumni/ying-lu.webp```).
+* **pictureAlt** (optional): Alt text for picture.
+* **profileUrl** (optional): Link to the student / alumni's website. If added, the student's card will be clickable and lead to the website. 
+
 
 # React + TypeScript + Vite
 

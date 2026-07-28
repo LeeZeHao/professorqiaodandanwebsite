@@ -622,7 +622,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Jingyuan Deng, <b>Dandan Qiao</b>, and Warut Khern-Am- Nuai, “An Empirical Study about the Impact of Incentivized Reviews on Product Sales: The Case of Amazon Vine Program”, Invited for 3rd-Round Revision at <i>MIS Quarterly</i>.
+        Jingyuan Deng, <b>Dandan Qiao</b>, and Warut Khern-Am- Nuai, “An Empirical Study about the Impact of Incentivized Reviews on Product Sales: The Case of Amazon Vine Program”, Under 3rd-Round Revision at <i>MIS Quarterly</i>.
       </>
     ),
   },
@@ -630,7 +630,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Jingyuan Deng, Grace Gu, <b>Dandan Qiao</b>, “Unraveling the Role of Public Crowds in Driving Innovation for Technology Product Development”, Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
+        Jingyuan Deng, Grace Gu, <b>Dandan Qiao</b>, “Unraveling the Role of Public Crowds in Driving Innovation for Technology Product Development”, Invited for 3rd-Round Review at <i>MIS Quarterly</i>.
       </>
     ),
   },
@@ -638,7 +638,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Haoyu Yuan, <b>Dandan Qiao</b>, Qiang Wei. “Decoding Persuasion: A Hierarchical Deep Learning Framework for Predicting Crowdfunding Success, ” Invited for 2nd-Round Review at <i>Journal of Management Information Systems</i>.
+        Haoyu Yuan, <b>Dandan Qiao</b>, Qiang Wei. “Decoding Persuasion: A Hierarchical Deep Learning Framework for Predicting Crowdfunding Success, ” Invited for 3rd-Round Review at <i>Journal of Management Information Systems</i>.
       </>
     ),
   },
@@ -646,7 +646,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Qian Xiong, Mingxuan Zheng, <b>Dandan Qiao</b> and Jingjing Li, “Understanding Impact of Social Media Brand Activism on Product Sales” Under Major Revision at <i>MIS Quarterly</i>.
+        Qian Xiong, Mingxuan Zheng, <b>Dandan Qiao</b> and Jingjing Li, “Understanding Impact of Social Media Brand Activism on Product Sales” Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
       </>
     ),
   },
@@ -654,7 +654,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Dinghao Xi, Ying Lu, <b>Dandan Qiao</b> and Wei Xu, “Unveiling the Secrets of Collaboration in Online Video Sharing Platforms” Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
+        Dinghao Xi, Ying Lu, <b>Dandan Qiao</b> and Wei Xu, “Unveiling the Secrets of Collab oration in Online Video Sharing Platforms” Invited for 2nd-Round Review at <i>MIS Quarterly</i>.
       </>
     ),
   },
@@ -662,7 +662,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Jiaxu Peng, Jungpil Hahn, <b>Dandan Qiao</b>. “Predictive Analytics in Changing Environments: Trade-Offs in Response to Changes in Data Patterns”, Rejected & Resubmitted at <i>Information Systems Research</i>.
+        Jiaxu Peng, Jungpil Hahn, <b>Dandan Qiao</b>, “Predictive Analytics in Changing Environments: Trade-Offs in Response to Changes in Data Patterns”, Invited for 2nd Round Review at <i>Information Systems Research</i>.
       </>
     ),
   },
@@ -686,7 +686,7 @@ export const underReviewPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        Yingfei Shi, <b>Dandan Qiao</b>, Shukai Liu, “Your Like Is Not My Like: Propensity Aware Multi-Behavior Recommendation’, Under Review at AAAI 2027.
+        Yingfei Shi, <b>Dandan Qiao</b>, Shukai Liu, “Your Like Is Not My Like: Propensity Aware Multi-Behavior Recommendation", Under Review at AAAI 2027.
       </>
     ),
   },
@@ -697,7 +697,7 @@ export const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “Structured Event Representation and Stock Return Predictability” with Bing Han, Gang Li, and Mingxuan Zheng, Working paper.
+        “Structured Event Representation and Stock Return Predictability” with Bing Han, Gang Li, and Mingxuan Zheng, Working Paper.
       </>
     ),
   },
@@ -705,7 +705,7 @@ export const workingPaperPublications: TimelinePublication[] = [
     year: "",
     text: (
       <>
-        “Modelling Collusion Dynamics in Decentralized Online Social Media” with Ying Lu, Shu He, and Bernard C Y Tan. Working Paper.
+        “Modelling Collusion Dynamics in Decentralized Online Social Media” with Ying Lu, Shu He, and Bernard C Y Tan, Working Paper.
       </>
     ),
   },
